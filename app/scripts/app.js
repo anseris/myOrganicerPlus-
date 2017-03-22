@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('pruebaApp', [
+  .module('myEasyOrganicer', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
@@ -17,7 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngMaterial'
+    'ngMaterial',
+    'firebase'
   ])
   .config(function ($routeProvider) {
     $routeProvider

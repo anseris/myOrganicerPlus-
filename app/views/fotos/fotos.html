@@ -1,0 +1,20 @@
+<md-content class="bkAuto height100 bgFotos" layout-padding ng-controller="fotosCtrl">
+    <div flex="80" class="bkAuto contenedorFotos" layout="row">
+        <div flex="100" layout-padding layout-margin layout="row" class="botones">
+            <div flex="50" class="add" layout="row" ng-click="abrirModalAdd()" >
+                <div class="contenedorIcons">
+                    <i class="fa fa-plus font40" aria-hidden="true"></i>
+                </div>
+                <span flex="80" class="pseudoBoton font30">{{hola}}</span>
+
+            </div>
+            <div flex="50" class="buscar" layout="row">
+                <div  class="contenedorIcons">
+                    <i class="fa fa-search font40" aria-hidden="true"></i>
+                </div>
+                <span flex="80" class="pseudoBoton font30">Añadir Fotos</span>
+            </div>
+        </div>
+    </div>
+
+</md-content>

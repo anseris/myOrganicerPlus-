@@ -7,25 +7,29 @@
  * # MainCtrl
  * Controller of the pruebaApp
  */
-angular.module('pruebaApp')
-  .controller('MainCtrl', function ($scope) {
+angular.module('myEasyOrganicer')
+  .controller('MainCtrl', function ($scope, $firebase) {
 
-        $scope.tareas =
-        [
-            {
-                'texto': 'Primera tarea',
-                'hecho':true
-            },
-            {
-                'texto': 'Segunda tarea',
-                'hecho':false
-            }
-        ];
 
+
+// var refTareas = firebase.database();
+// var ref = refTareas.ref('https://myorganicerplus.firebaseio.com/');
+// console.log(refTareas)
+    //   var refTareas= new Firebase('https://myorganicerplus.firebaseio.com/fotos');
+
+        // $scope.tareas =ref;
         $scope.agregarTarea =function(){
-            $scope.tareas.push({texto:$scope.textoNuevaTarea, hecho:false});
-            $scope.textoNuevaTarea='';
-        };
+          firebase.database().ref('myorganicerplus/').set({
+            texto: $scope.textoNuevaTarea,
+            hecho: false
+          });
+          $scope.textoNuevaTarea='';
+        }
+
+        // $scope.agregarTarea =function(){
+        //     $scope.tareas.$add({texto:$scope.textoNuevaTarea, hecho:false});
+        //     $scope.textoNuevaTarea='';
+        // };
 
         $scope.restantes =function(){
             var cuenta = 0;

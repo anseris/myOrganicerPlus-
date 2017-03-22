@@ -1,29 +1,54 @@
+<!-- <md-content class="height100">
+    <md-tabs class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
+        <md-tab class="height100" id="tab1">
+            <md-tab-label>Inicio</md-tab-label>
+            <md-tab-body class="height100">
+                <ng-include src="'views/inicio.html'"></ng-include>
+            </md-tab-body>
+        </md-tab>
+        <md-tab class="height100" id="tab2" ng-disabled="data.secondLocked">
+            <md-tab-label>Fotos</md-tab-label>
+            <md-tab-body class="height100">
+                <ng-include src="'views/fotos/fotos.html'"></ng-include>
+            </md-tab-body>
+        </md-tab>
+        <md-tab class="height100" id="tab3">
+            <md-tab-label>Item Three</md-tab-label>
+            <md-tab-body class="height100">
+                View for Item #3 <br/>
+                data.selectedIndex = 2;
+            </md-tab-body>
+        </md-tab>
+
+    </md-tabs>
+</md-content> -->
+
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+    <h1>'Allo, 'Allo!</h1>
+    <p class="lead">
+        <img src="images/yeoman.png" alt="I'm Yeoman"><br>
+        Always a pleasure scaffolding your apps.
+    </p>
+    <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
 </div>
 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button class="md-raised">Button</md-button>
-      <md-button class="md-raised md-primary">Primary</md-button>
-      <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
-      <md-button class="md-raised md-warn">Warn</md-button>
-      <div class="label">Raised</div>
-    </section>
+    <md-button class="md-raised">Button</md-button>
+    <md-button class="md-raised md-primary">Primary</md-button>
+    <md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
+    <md-button class="md-raised md-warn">Warn</md-button>
+    <div class="label">Raised</div>
+</section>
 
 <div class="row marketing">
-  <span>{{restantes()}} de {{tareas.length}}</span>
- <ul>
-     <li ng-repeat="tarea in tareas">
-         <input type="checkbox" ng-model="tarea.hecho">
-         <span>{{tarea.texto}}</span>
-     </li>
- </ul>
- <form ng-submit="agregarTarea()">
-     <input type="text" ng-model="textoNuevaTarea">
-     <md-button class="md-raised" type="submit">agregar</md-button>
- </form>
+    <span>{{restantes()}} de {{tareas.length}}</span>
+    <ul>
+        <li ng-repeat="tarea in tareas">
+            <input type="checkbox" ng-model="tarea.hecho">
+            <span>{{tarea.texto}}</span>
+        </li>
+    </ul>
+    <form ng-submit="agregarTarea()">
+        <input type="text" ng-model="textoNuevaTarea">
+        <md-button class="md-raised" type="submit">agregar</md-button>
+    </form>
 </div>

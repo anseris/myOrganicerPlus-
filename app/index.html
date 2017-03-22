@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="pruebaApp">
+  <body ng-app="myEasyOrganicer">
+
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -25,7 +26,7 @@
 
 
     <div class="container">
-    <div ng-view=""></div>
+    <div class="height100" ng-view=""></div>
     </div>
 
 
@@ -53,12 +54,28 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+<!-- <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script> -->
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBrTHzw8h_-KGJly5rLFAlokJQyRM_7cSA",
+    authDomain: "myorganicerplus.firebaseapp.com",
+    databaseURL: "https://myorganicerplus.firebaseio.com",
+    storageBucket: "myorganicerplus.appspot.com",
+    messagingSenderId: "980195775213"
+  };
+  firebase.initializeApp(config);
+</script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/fotosController.js"></script>
         <!-- endbuild -->
 </body>
 </html>
