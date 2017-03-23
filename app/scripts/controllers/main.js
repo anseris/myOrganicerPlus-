@@ -19,7 +19,7 @@ angular.module('myEasyOrganicer')
 
         // $scope.tareas =ref;
         $scope.agregarTarea =function(){
-          firebase.database().ref('myorganicerplus/').set({
+          firebase.database().ref('fotos/').set({
             texto: $scope.textoNuevaTarea,
             hecho: false
           });

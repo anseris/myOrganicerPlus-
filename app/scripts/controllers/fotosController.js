@@ -40,18 +40,29 @@ angular.module('myEasyOrganicer')
 
 
   angular.module('myEasyOrganicer')
-      .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase',  function($scope, $mdDialog, $firebase) {
-          var refAnadirCarpetas= new Firebase('https://myorganicerplus.firebaseio.com/fotos');
-        //   $scope.fotos=[];
+      .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase', '$firebaseArray', '$filter',  function($scope, $mdDialog, $firebase, $firebaseArray, $filter) {
+    
+        var db = firebase.database();
+        var ref = db.ref("fotos/carpetas");
+        $scope.carpetasFotos=$firebaseArray(ref);
+        var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+        //  var id= $scope.carpetasFotos ;
+        $scope.agregarCarpeta =function(){
+            var id=($scope.carpetasFotos).length + 1;
 
-          $scope.carpetasFotos= $firebase(refAnadirCarpetas);
-          $scope.fechaActual= new Date();
+             console.log('$scope.fechaActual',fechaActual)
+            // var usersRef = ref.child("carpetas");
+                ref.push().set({
 
-          $scope.agregarCarpeta =function(){
-              $scope.fechaActual= new Date();
-              $scope.carpetasFotos.$add({idCarpeta: '1' ,titulo:$scope.textoNuevaTarea, fechaActual:$scope.fechaActual});
-              $scope.textoNuevaTarea='';
-          };
+                    idCarpeta: id,
+                    titulo:$scope.tituloCarpeta,
+                    fechaActual:fechaActual
+
+                });
+                $scope.carpetasFotos=$firebaseArray(ref);
+
+
+            };
 
           $scope.cancel = function() {
               $mdDialog.cancel();
