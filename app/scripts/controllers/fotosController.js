@@ -31,8 +31,8 @@ angular.module('myEasyOrganicer')
 
             }, function() {
 
-            })
-        }
+            });
+        };
 
 
   }]);
@@ -40,32 +40,42 @@ angular.module('myEasyOrganicer')
 
 
   angular.module('myEasyOrganicer')
-      .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase', '$firebaseArray', '$filter',  function($scope, $mdDialog, $firebase, $firebaseArray, $filter) {
-    
-        var db = firebase.database();
-        var ref = db.ref("fotos/carpetas");
-        $scope.carpetasFotos=$firebaseArray(ref);
-        var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
-        //  var id= $scope.carpetasFotos ;
-        $scope.agregarCarpeta =function(){
-            var id=($scope.carpetasFotos).length + 1;
+      .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase', 'fotosService', '$filter',  function($scope, $mdDialog, $firebase, fotosService, $filter) {
 
-             console.log('$scope.fechaActual',fechaActual)
-            // var usersRef = ref.child("carpetas");
-                ref.push().set({
+          // Recuperar datos
+        //   $scope.loading= true;
 
-                    idCarpeta: id,
-                    titulo:$scope.tituloCarpeta,
-                    fechaActual:fechaActual
-
-                });
-                $scope.carpetasFotos=$firebaseArray(ref);
-
-
-            };
-
-          $scope.cancel = function() {
-              $mdDialog.cancel();
+          var datosRecuperados = function(datos) {
+              $scope.carpetasFotos=datos;
+            //   $scope.loading= false;
+          };
+          var errorLLamada = function() {
           };
 
-      }]);
+          fotosService.recuperarCarpetas(datosRecuperados, errorLLamada);
+
+          // añadir carpetas
+
+          var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+
+          // var datosAddOk = function(datos) {
+          //     $scope.carpetasFotos=datos;
+          // };
+
+          $scope.agregarCarpeta =function(){
+              var id=($scope.carpetasFotos).length + 1;
+
+              var datosAEnviar= {
+                  idCarpeta: id,
+                  titulo:$scope.tituloCarpeta,
+                  fechaActual:fechaActual
+              }
+
+              fotosService.addCarpeta(datosAEnviar);
+          };
+
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+
+        }]);

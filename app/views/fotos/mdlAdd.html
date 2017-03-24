@@ -8,32 +8,83 @@
             </md-button>
         </div>
     </md-toolbar>
+    <form name="fotosForm">
+        <md-tabs md-dynamic-height md-border-bottom class="tabModal">
 
-    <md-dialog-content layout-padding>
-        <form name="userForm">
-            <md-input-container class="md-block">
-                <label>Nombre de la carpeta</label>
-                <input ng-model="tituloCarpeta">
-            </md-input-container>
-            {{carpetasFotos.length}}
-            <ul>
-                <li ng-repeat="carpeta in carpetasFotos">
+          <md-tab label="Añadir carpetas" >
+            <md-content class="md-padding">
+                <md-dialog-content layout-padding>
+                        <!-- <div layout="row" layout-sm="column" layout-align="space-around" ng-if="loading">
+                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                        </div> -->
+                        <md-input-container class="md-block">
+                            <label>Nombre de la carpeta</label>
+                            <input ng-model="tituloCarpeta">
+                        </md-input-container>
+                        <!-- <ul>
+                            <li ng-repeat="carpeta in carpetasFotos">
 
-                    <span>{{carpeta.idCarpeta}}</span>
-                    <span>{{carpeta.titulo}}</span>
-                    <span>{{carpeta.fechaActual}}</span>
-                </li>
-            </ul>
+                                <span>{{carpeta.idCarpeta}}</span>
+                                <span>{{carpeta.titulo}}</span>
+                                <span>{{carpeta.fechaActual}}</span>
+                            </li>
+                        </ul> -->
 
-            <!-- <md-input-container class="md-block">
-                <input ng-model="user.address2">
-            </md-input-container> -->
+                        <!-- <md-input-container class="md-block">
+                            <input ng-model="user.address2">
+                        </md-input-container> -->
 
-    </md-dialog-content>
+                </md-dialog-content>
 
-    <md-dialog-actions layout="row">
+                <md-dialog-actions layout="row">
+                    <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir carpeta</md-button>
+                </md-dialog-actions>
+            </md-content>
+          </md-tab>
 
-        <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Not Useful</md-button>
+          <md-tab label="Añadir fotos">
+            <md-content class="md-padding">
+                <md-dialog-content layout-padding>
+                        <!-- <div layout="row" layout-sm="column" layout-align="space-around" ng-if="loading">
+                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                        </div> -->
+                        <md-input-container class="md-block">
+                            <label class="labelInput">Nombre de la foto</label>
+                            <input ng-model="tituloCarpeta">
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label class="labelInput">Elige carpeta de ubicacion</label>
+                            <md-select name="carpetas" ng-model="carpetas">
+                                <md-option
+                                ng-repeat="carpeta in carpetasFotos"
+                                ng-value="carpeta.idCarpeta">
+                                {{carpeta.titulo}}
+
+                                </md-option>
+
+                            </md-select>
+                        </md-input-container>
+                        <!-- <ul>
+                            <li ng-repeat="carpeta in carpetasFotos">
+
+                                <span>{{carpeta.idCarpeta}}</span>
+                                <span>{{carpeta.titulo}}</span>
+                                <span>{{carpeta.fechaActual}}</span>
+                            </li>
+                        </ul> -->
+
+                        <!-- <md-input-container class="md-block">
+                            <input ng-model="user.address2">
+                        </md-input-container> -->
+
+                </md-dialog-content>
+
+                <md-dialog-actions layout="row">
+                    <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir foto</md-button>
+                </md-dialog-actions>
+            </md-content>
+          </md-tab>
+        </md-tabs>
     </form>
-    </md-dialog-actions>
 </md-dialog>

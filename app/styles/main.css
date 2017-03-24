@@ -2872,6 +2872,24 @@ md-ink-bar {
 md-toolbar {
   background-color: #607d8b !important;
 }
+.tabModal md-tabs-wrapper {
+  background-color: #ffffff !important;
+}
+.tabModal md-pagination-wrapper {
+  width: 100%;
+}
+.tabModal md-tab-item {
+  width: 50%;
+}
+.tabModal md-ink-bar {
+  height: 8px;
+  background-color: #607d8b;
+}
+.tabModal md-tabs-wrapper,
+.tabModal md-tabs-canvas,
+.tabModal md-pagination-wrapper {
+  height: 50px;
+}
 /*Paginas*/
 .bgInicio {
   background-color: #5d4037;

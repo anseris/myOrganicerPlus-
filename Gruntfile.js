@@ -62,10 +62,52 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
+          '.tmp/less/{,*/}*.less',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
-      }
     },
+
+        less: {
+            files: ['<%= yeoman.app %>/less{,*/}*.less'],
+            tasks: ['less:development'],
+            options: {
+                // spawn: false,
+                livereload: '<%= connect.options.livereload %>'
+            }
+        }
+    },
+
+    less: {
+        development: {
+            files: {
+                '<%= yeoman.app %>/styles/main.css':'<%= yeoman.app %>/less/main.less'
+            }
+        },
+        production: {
+            options: {
+                 cleancss: true
+            },
+            files: {
+                'css/styles.min.css': 'less/styles.less'
+            }
+        }
+    },
+
+
+
+
+    // less: {
+    //   development: {
+    //     options: {
+    //       compress: true,
+    //       yuicompress: true,
+    //       optimization: 2
+    //     },
+    //     files: {
+    //       "css/main.css": "less/main.less" // destination file and source file
+    //     }
+    //   }
+    // },
 
     // The actual grunt server settings
     connect: {
@@ -220,7 +262,7 @@ module.exports = function (grunt) {
             }
           }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -426,6 +468,9 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -438,7 +483,8 @@ module.exports = function (grunt) {
       'concurrent:server',
       'postcss:server',
       'connect:livereload',
-      'watch'
+      'watch',
+      'less'
     ]);
   });
 
@@ -455,6 +501,8 @@ module.exports = function (grunt) {
     'connect:test',
     'karma'
   ]);
+
+  // grunt.registerTask('default', ['less', 'watch']);
 
   grunt.registerTask('build', [
     'clean:dist',

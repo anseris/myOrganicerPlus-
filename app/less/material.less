@@ -7,7 +7,12 @@ md-tabs{
 }
 md-tabs-wrapper{
     background-color: @verdeCabecera !important;
+    // .tabModal{
+    //     background-color: @blanco !important;
+    // }
 }
+
+
 md-tabs-wrapper, md-tabs-canvas, md-pagination-wrapper{
     height: 70px;
 }
@@ -27,4 +32,25 @@ md-ink-bar{
 
 md-toolbar{
     background-color: @cabeceraModal !important;
+}
+
+.tabModal{
+    md-tabs-wrapper{
+        background-color: @blanco !important;
+    }
+    md-pagination-wrapper{
+        width: 100%;
+    }
+    md-tab-item{
+        width: 50%;
+    }
+    md-ink-bar{
+        height: 8px;
+        background-color: @cabeceraModal;
+    }
+    md-tabs-wrapper, md-tabs-canvas, md-pagination-wrapper{
+        height: 50px;
+    }
+
+
 }
