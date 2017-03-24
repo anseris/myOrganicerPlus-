@@ -40,42 +40,55 @@ angular.module('myEasyOrganicer')
 
 
   angular.module('myEasyOrganicer')
-      .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase', 'fotosService', '$filter',  function($scope, $mdDialog, $firebase, fotosService, $filter) {
+  .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase', 'fotosService', '$filter',  function($scope, $mdDialog, $firebase, fotosService, $filter) {
 
-          // Recuperar datos
-        //   $scope.loading= true;
+      // Recuperar datos
+      //   $scope.loading= true;
 
-          var datosRecuperados = function(datos) {
-              $scope.carpetasFotos=datos;
-            //   $scope.loading= false;
-          };
-          var errorLLamada = function() {
-          };
+      var datosRecuperados = function(datos) {
+          $scope.carpetasFotos=datos;
+          //   $scope.loading= false;
+      };
+      var errorLLamada = function() {
+      };
 
-          fotosService.recuperarCarpetas(datosRecuperados, errorLLamada);
+      fotosService.recuperarCarpetas(datosRecuperados, errorLLamada);
 
-          // añadir carpetas
+      // añadir carpetas
 
-          var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+      var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
 
-          // var datosAddOk = function(datos) {
-          //     $scope.carpetasFotos=datos;
-          // };
+      // var datosAddOk = function(datos) {
+      //     $scope.carpetasFotos=datos;
+      // };
 
-          $scope.agregarCarpeta =function(){
-              var id=($scope.carpetasFotos).length + 1;
+      $scope.agregarCarpeta =function(){
+          var id=($scope.carpetasFotos).length + 1;
 
-              var datosAEnviar= {
-                  idCarpeta: id,
-                  titulo:$scope.tituloCarpeta,
-                  fechaActual:fechaActual
-              }
+          var datosAEnviar= {
+              idCarpeta: id,
+              titulo:$scope.tituloCarpeta,
+              fechaActual:fechaActual
+          }
 
-              fotosService.addCarpeta(datosAEnviar);
-          };
+          fotosService.addCarpeta(datosAEnviar);
+      };
 
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
+      $scope.agregarFoto =function(){
+        //   var id=($scope.carpetasFotos).length + 1;
 
-        }]);
+          var datosAEnviar= {
+              idFoto: $scope.carpetas,
+              titulo:$scope.tituloFoto
+          }
+          console.log('datosAEnviar', datosAEnviar)
+          fotosService.addFoto(datosAEnviar);
+
+        //   fotosService.addCarpeta(datosAEnviar);
+      };
+
+      $scope.cancel = function() {
+          $mdDialog.cancel();
+      };
+
+  }]);

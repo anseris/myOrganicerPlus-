@@ -45,12 +45,9 @@
           <md-tab label="Añadir fotos">
             <md-content class="md-padding">
                 <md-dialog-content layout-padding>
-                        <!-- <div layout="row" layout-sm="column" layout-align="space-around" ng-if="loading">
-                            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-                        </div> -->
                         <md-input-container class="md-block">
                             <label class="labelInput">Nombre de la foto</label>
-                            <input ng-model="tituloCarpeta">
+                            <input ng-model="tituloFoto">
                         </md-input-container>
 
                         <md-input-container class="md-block">
@@ -58,7 +55,7 @@
                             <md-select name="carpetas" ng-model="carpetas">
                                 <md-option
                                 ng-repeat="carpeta in carpetasFotos"
-                                ng-value="carpeta.idCarpeta">
+                                ng-value="carpeta.$id">
                                 {{carpeta.titulo}}
 
                                 </md-option>
@@ -81,7 +78,7 @@
                 </md-dialog-content>
 
                 <md-dialog-actions layout="row">
-                    <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir foto</md-button>
+                    <md-button class="md-raised md-primary btModal" ng-click="agregarFoto()">Añadir foto</md-button>
                 </md-dialog-actions>
             </md-content>
           </md-tab>

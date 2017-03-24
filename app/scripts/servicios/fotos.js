@@ -5,8 +5,9 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
     var db = firebase.database();
 
-        var ref = db.ref("fotos/carpetas");
-        var listacarpetasFotos=$firebaseArray(ref);
+        var refCarpeta = db.ref("fotos/carpetas");
+        // var refFoto = db.ref("fotos/carpetas/" + idFoto);
+        var listacarpetasFotos=$firebaseArray(refCarpeta);
 
     var recuperarCarpetas = function(callback, callbackError) {
         if(listacarpetasFotos===undefined){
@@ -21,10 +22,15 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
 
     var addCarpeta = function(datosAdded) {
-        ref.push().set(datosAdded);
+        refCarpeta.push().set(datosAdded);
         // callback(listacarpetasFotos)
 
 
+    };
+    var addFoto = function(datosAdded) {
+        var idFotoA= datosAdded.idFoto
+        var refFoto = db.ref("fotos/carpetas/" + idFotoA);
+        refFoto.push().set(datosAdded);
     };
 
 
@@ -36,7 +42,8 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
     return {
         addCarpeta: addCarpeta,
-        recuperarCarpetas:recuperarCarpetas
+        recuperarCarpetas:recuperarCarpetas,
+        addFoto:addFoto
 
     };
 }]);
