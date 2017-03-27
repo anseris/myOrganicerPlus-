@@ -24,25 +24,8 @@
 .font25 {
   font-size: 25px !important;
 }
-.font20 {
-  font-size: 20px !important;
-}
-.txtAlgCent {
-  text-align: center;
-}
-.mgTop10 {
-  margin-top: 10px;
-}
 .btModal {
   background-color: #607d8b !important;
-}
-.iconoCarpeta {
-  font-size: 100px !important;
-  color: #607d8b;
-  height: 100px;
-}
-.fltLeft {
-  float: left;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -2889,35 +2872,9 @@ md-ink-bar {
 md-toolbar {
   background-color: #607d8b !important;
 }
-md-input-container {
-  margin: 15px 0 0;
-}
-.tabModal md-tabs-wrapper {
-  background-color: #ff9800 !important;
-}
-.tabModal md-pagination-wrapper {
-  width: 100%;
-}
-.tabModal md-tab-item {
-  width: 50%;
-}
-.tabModal md-ink-bar {
-  height: 8px;
-  background-color: #607d8b;
-}
-.tabModal md-tabs-wrapper,
-.tabModal md-tabs-canvas,
-.tabModal md-pagination-wrapper {
-  height: 50px;
-  background-color: #ff9800 !important;
-}
-.tabModal md-content.md-default-theme,
-.tabModal md-content {
-  background-color: #ff9800 !important;
-}
 /*Paginas*/
 .bgInicio {
-  background-color: #5d4037;
+  background-color: blue;
   color: #ffffff;
 }
 .bgFotos {
@@ -2933,36 +2890,4 @@ md-input-container {
   border-left: none;
   line-height: 50px;
   text-align: center;
-}
-.estilosFormularioAdd {
-  border: 3px solid;
-  width: 87%;
-}
-.estilosBuscador {
-  border: 3px solid;
-  width: 88%;
-}
-.contenedorBuscador {
-  width: 100%;
-  background-color: #ff9800;
-  color: #607d8b;
-}
-.subContBusq {
-  clear: both;
-  float: left;
-  width: 100%;
-}
-.contCarpeta {
-  float: left;
-  width: 25%;
-}
-.formatoLista {
-  margin-top: 10px;
-}
-.formatoLista i {
-  font-size: 20px !important;
-}
-.md-block i {
-  font-size: 20px !important;
-  padding: 3px;
 }

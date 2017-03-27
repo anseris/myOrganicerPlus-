@@ -8,7 +8,7 @@
  * Controller of the pruebaApp
  */
 angular.module('myEasyOrganicer')
-  .controller('MainCtrl', function ($scope, $firebase) {
+  .controller('MainCtrl', function ($scope) {
 
 
 
@@ -19,12 +19,12 @@ angular.module('myEasyOrganicer')
 
         // $scope.tareas =ref;
         $scope.agregarTarea =function(){
-          firebase.database().ref('fotos/').set({
-            texto: $scope.textoNuevaTarea,
-            hecho: false
-          });
-          $scope.textoNuevaTarea='';
-        }
+        // //   firebase.database().ref('fotos/').set({
+        //     texto: $scope.textoNuevaTarea,
+        //     hecho: false
+        // //   });
+        //   $scope.textoNuevaTarea='';
+      };
 
         // $scope.agregarTarea =function(){
         //     $scope.tareas.$add({texto:$scope.textoNuevaTarea, hecho:false});
@@ -44,7 +44,7 @@ angular.module('myEasyOrganicer')
             $scope.tareas= [];
             angular.forEach(tareasViejas, function(tarea){
                 if(!tarea.hecho){
-                    $scope.tareas.push(tarea)
+                    $scope.tareas.push(tarea);
                 }
             });
         };

@@ -1,20 +1,156 @@
 <md-content class="bkAuto height100 bgFotos" layout-padding ng-controller="fotosCtrl">
-    <div flex="80" class="bkAuto contenedorFotos" layout="row">
-        <div flex="100" layout-padding layout-margin layout="row" class="botones">
-            <div flex="50" class="add" layout="row" ng-click="abrirModalAdd()" >
-                <div class="contenedorIcons">
-                    <i class="fa fa-plus font40" aria-hidden="true"></i>
+    <div flex="95" class="bkAuto contenedorFotos" layout="row">
+        <!-- <div flex="100" layout-padding layout-margin layout="row" class="botones"> -->
+            <div flex="50" >
+                <div flex="100" class="add" layout="row" ng-click="abrirModalAdd()" >
+                    <div class="contenedorIcons">
+                        <i class="fa fa-plus font40" aria-hidden="true"></i>
+                    </div>
+                    <span flex="80" class="pseudoBoton font30">{{hola}}</span>
                 </div>
-                <span flex="80" class="pseudoBoton font30">{{hola}}</span>
+                <div flex="100"layout="row">
+                    <form name="fotosForm" class="estilosFormularioAdd">
+                        <md-tabs md-dynamic-height md-border-bottom class="tabModal">
+
+                          <md-tab label="Añadir carpetas" >
+                            <md-content class="md-padding">
+                                        <!-- <md-input-container class="md-block">
+                                            <label>Nombre de la carpeta</label>
+                                            <input ng-model="tituloCarpeta">
+                                        </md-input-container> -->
+                                        <div layout-gt-xs="row">
+                                          <md-input-container class="md-block" flex-gt-xs>
+                                              <label>Nombre de la carpeta</label>
+                                              <input ng-model="tituloCarpeta">
+                                          </md-input-container>
+
+                                          <md-input-container>
+                                            <label>Enter date</label>
+                                            <md-datepicker ng-model="fechaCarpeta"></md-datepicker>
+                                          </md-input-container>
+                                        </div>
+
+                                <!-- <md-dialog-actions layout="row"> -->
+                                    <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir carpeta</md-button>
+                                <!-- </md-dialog-actions> -->
+                            </md-content>
+                          </md-tab>
+
+                          <md-tab label="Añadir fotos">
+                            <md-content class="md-padding">
+                                <!-- <md-dialog-content layout-padding> -->
+                                        <md-input-container class="md-block">
+                                            <label class="labelInput">Nombre de la foto</label>
+                                            <input ng-model="tituloFoto">
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block">
+                                            <label class="labelInput">Elige carpeta de ubicacion</label>
+                                            <md-select name="carpetas" ng-model="carpetas">
+                                                <md-option
+                                                ng-repeat="carpeta in carpetasFotos"
+                                                ng-value="carpeta.$id">
+                                                {{carpeta.titulo}}
+
+                                                </md-option>
+
+                                            </md-select>
+                                        </md-input-container>
+                                        <div flex="100" class="mgTop10" layout="row">
+                                            <div flex="60" class="mgTop10">
+                                                <input class="ng-hide" id="file" type="file" />
+                                                <label for="file" class="md-button md-fab md-mini md-primary md-hue-2"><i class="fa fa-upload" aria-hidden="true"></i></label>
+                                                <span>Agrega la fotografia</span>
+                                            </div>
+                                            <div flex="40" class="">
+                                                <md-input-container>
+                                                    <label>Enter date</label>
+                                                    <md-datepicker ng-model="fechaFoto"></md-datepicker>
+                                                </md-input-container>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- <ul>
+                                            <li ng-repeat="foto in fotos">
+
+                                                <span>{{foto.img}}</span>
+                                                <img src="{{foto.img}}" alt="">
+                                            </li>
+                                        </ul> -->
+
+                                        <!-- <md-input-container class="md-block">
+                                            <input ng-model="user.address2">
+                                        </md-input-container> -->
+
+                                <!-- </md-dialog-content> -->
+
+                                <!-- <md-dialog-actions layout="row"> -->
+                                    <md-button class="md-raised md-primary btModal" ng-click="agregarFoto()">Añadir foto</md-button>
+                                <!-- </md-dialog-actions> -->
+                            </md-content>
+                          </md-tab>
+                        </md-tabs>
+                    </form>
+                </div>
 
             </div>
-            <div flex="50" class="buscar" layout="row">
-                <div  class="contenedorIcons">
-                    <i class="fa fa-search font40" aria-hidden="true"></i>
+            <div flex="50" >
+                <div flex="100" class="add" layout="row" ng-click="abrirModalAdd()" >
+                    <div  class="contenedorIcons">
+                        <i class="fa fa-search font40" aria-hidden="true"></i>
+                    </div>
+                    <span flex="80" class="pseudoBoton font30">Añadir Fotos</span>
                 </div>
-                <span flex="80" class="pseudoBoton font30">Añadir Fotos</span>
+                <div class="estilosBuscador" layout="row" >
+                    <md-content class="md-padding  contenedorBuscador">
+                        <md-input-container flex="100" class="md-block">
+                            <label>Busca foto o carpeta</label>
+                            <input flex="90" ng-model="buscadorFotos">
+                            <span flex="10" ng-click="formatoIconsFunc()"><i class="fa fa-th-large" aria-hidden="true"></i></span>
+                            <span flex="10" ng-click="formatoListaFunc()"><i class="fa fa-th-list" aria-hidden="true"></i></span>
+                        </md-input-container>
+
+                        <div class="subContBusq" ng-show="formatoIcons">
+                            <div flex="25" layout-padding  class="bkAuto txtAlgCent contCarpeta" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos">
+                                <i class="fa fa-folder-o iconoCarpeta" aria-hidden="true"></i><br>
+                                <span>{{carpeta.titulo}}</span>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+                        <div class="formatoLista" ng-show="formatoLista" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" >
+                            <div layout="row" class="" layout-wrap >
+                                <i flex="10" class="fa fa-folder " aria-hidden="true"></i>
+                                <div flex="60" >{{ carpeta.titulo }}</div>
+                                <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div>
+                                <div flex="10" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                                <div flex="10" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </md-content>
+                    <!-- <ul>
+                        <li ng-repeat="carpeta in carpetasFotos">
+
+                            <span>{{carpeta.idCarpeta}}</span>
+                            <span>{{carpeta.titulo}}</span>
+                            <span>{{carpeta.fechaActual}}</span>
+                        </li>
+                    </ul>
+
+                    <i class="fa fa-folder" aria-hidden="true">hola</i> -->
+
+                </div>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 
 </md-content>

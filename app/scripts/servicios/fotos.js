@@ -1,13 +1,20 @@
 'use strict';
 
-angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$firebaseArray', '$filter', function($firebase, $firebaseArray, $filter) {
+angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$firebaseArray',  function($firebase, $firebaseArray) {
 
 
     var db = firebase.database();
 
-        var refCarpeta = db.ref("fotos/carpetas");
+        var ref = db.ref("fotos/carpetas");
+        // var refFotos = db.ref("fotos/carpetas/fotos");
+        var storage = firebase.storage().ref("images");
         // var refFoto = db.ref("fotos/carpetas/" + idFoto);
-        var listacarpetasFotos=$firebaseArray(refCarpeta);
+        var listacarpetasFotos=$firebaseArray(ref);
+        // var listacarpetasFotos=$firebaseArray(ref);
+
+        // var refFoto = firebase.database().ref().child('fotos/carpetas');
+        //
+        // var listaFotos = $firebaseArray(refFoto);
 
     var recuperarCarpetas = function(callback, callbackError) {
         if(listacarpetasFotos===undefined){
@@ -22,15 +29,28 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
 
     var addCarpeta = function(datosAdded) {
-        refCarpeta.push().set(datosAdded);
-        // callback(listacarpetasFotos)
-
-
+        ref.push().set(datosAdded);
     };
+
     var addFoto = function(datosAdded) {
-        var idFotoA= datosAdded.idFoto
-        var refFoto = db.ref("fotos/carpetas/" + idFotoA);
-        refFoto.push().set(datosAdded);
+        console.log('datosAdded', datosAdded)
+
+        var file= datosAdded.file;
+        var idFotoA= datosAdded.idCarpeta;
+        var refFoto = db.ref("fotos/carpetas/" + idFotoA + "/fotos");
+        // var listacarpetasFotos=$firebaseArray(ref);
+
+        storage.child(file.name).put(file).then(function(){
+            storage.child(file.name).getDownloadURL().then(function(url){
+                refFoto.push({
+                    idCarpeta: datosAdded.idCarpeta,
+                    fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
+                    fechaFoto: datosAdded.fechaFoto,
+                    tituloFoto:$scope.tituloFoto,
+                    img:url
+                });
+            });
+        });
     };
 
 
