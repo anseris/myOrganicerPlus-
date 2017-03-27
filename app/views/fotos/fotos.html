@@ -122,9 +122,20 @@
 
                         <div class="formatoLista" ng-show="formatoLista" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" >
                             <div layout="row" class="" layout-wrap >
-                                <i flex="10" class="fa fa-folder " aria-hidden="true"></i>
-                                <div flex="60" >{{ carpeta.titulo }}</div>
-                                <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div>
+                                <i flex="5" class="fa fa-folder " aria-hidden="true"></i>
+                                <div flex="75" ><strong>{{ carpeta.titulo }}</strong></div>
+                                <!-- <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div> -->
+                                <div flex="10" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                                <div flex="10" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
+
+                            </div>
+                        </div>
+                        <div class="formatoListaFoto" ng-show="formatoLista" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" >
+                            <div layout="row" class="" layout-wrap >
+                                <!-- <i  class="fa fa-folder " aria-hidden="true"></i> -->
+                                <i flex="5" class="fa fa-file-image-o" aria-hidden="true"></i>
+                                <div flex="75" >{{ carpeta.titulo }}</div>
+                                <!-- <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div> -->
                                 <div flex="10" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
                                 <div flex="10" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
 
