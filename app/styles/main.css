@@ -35,6 +35,8 @@
 }
 .btModal {
   background-color: #607d8b !important;
+  float: right;
+  margin-top: 5px;
 }
 .iconoCarpeta {
   font-size: 100px !important;
@@ -2924,23 +2926,31 @@ md-input-container {
   background-color: #ff9800;
   color: #ffffff;
 }
-.contenedorIcons {
+.add {
   border: 3px solid;
+}
+.search {
+  border: 3px solid;
+  margin-left: 5%;
+}
+.contenedorIcons {
+  border-right: 3px solid;
   padding: 7px;
+  text-align: center;
 }
 .pseudoBoton {
-  border: 3px solid;
-  border-left: none;
   line-height: 50px;
   text-align: center;
 }
 .estilosFormularioAdd {
   border: 3px solid;
-  width: 87%;
+}
+.estilosFormularioSearch {
+  border: 3px solid;
+  margin-left: 5%;
 }
 .estilosBuscador {
   border: 3px solid;
-  width: 88%;
 }
 .contenedorBuscador {
   width: 100%;
