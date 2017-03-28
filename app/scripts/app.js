@@ -18,8 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngMaterial',
-    'firebase',
-    'lfNgMdFileInput'
+    'firebase'
+    
   ])
   .config(function ($routeProvider) {
     $routeProvider
