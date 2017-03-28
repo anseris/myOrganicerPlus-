@@ -19,7 +19,6 @@ angular
     'ngSanitize',
     'ngMaterial',
     'firebase'
-    
   ])
   .config(function ($routeProvider) {
     $routeProvider

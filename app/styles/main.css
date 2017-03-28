@@ -2972,6 +2972,13 @@ md-input-container {
 .formatoLista i {
   font-size: 20px !important;
 }
+.formatoListaFoto {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.formatoListaFoto i {
+  font-size: 20px !important;
+}
 .md-block i {
   font-size: 20px !important;
   padding: 3px;
