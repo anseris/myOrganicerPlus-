@@ -101,25 +101,21 @@
                         </div>
                     </div>
                     <!--  -->
-                    <div class="formatoLista" ng-show="formatoLista" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" >
-                        <div layout="row" class="" layout-wrap ng-click="desplegarFotos(carpeta)" >
-                            <i flex="10" class="fa fa-folder " aria-hidden="true"></i>
-                            <div flex="60" >{{ carpeta.titulo }}</div>
-                            <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div>
+                    <div class="formatoLista" ng-show="formatoLista" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" ng-init="fotos.expanded=false">
+                        <div layout="row" class="" layout-wrap ng-click="fotos.expanded=!fotos.expanded" >
+                            <i flex="5" class="fa fa-folder " aria-hidden="true"></i>
+                            <div flex="75" >{{ carpeta.titulo }}</div>
+                            <!-- <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div> -->
                             <div flex="10" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
                             <div flex="10" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
-
-
-                        <div class="formatoListaFoto" ng-show="formatoLista" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" >
-                            <div layout="row" class="" layout-wrap >
-                                <!-- <i  class="fa fa-folder " aria-hidden="true"></i> -->
-                                <i flex="5" class="fa fa-file-image-o" aria-hidden="true"></i>
-                                <div flex="75" >{{ carpeta.titulo }}</div>
-                                <!-- <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div> -->
-                                <div flex="10" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
-                                <div flex="10" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
-
-
+                        </div>
+                        <div layout="row"  class="" layout-wrap ng-repeat="foto in carpeta.fotos" ng-show="fotos.expanded">
+                            <!-- <i  class="fa fa-folder " aria-hidden="true"></i> -->
+                            <i flex="5" class="fa fa-file-image-o" aria-hidden="true"></i>
+                            <div flex="75" >{{ foto.tituloFoto }}</div>
+                            <!-- <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div> -->
+                            <div flex="10" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                            <div flex="10" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
                         </div>
                     </div>
                 </md-content>

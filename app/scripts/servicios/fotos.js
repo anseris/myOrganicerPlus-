@@ -46,7 +46,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                     idCarpeta: datosAdded.idCarpeta,
                     fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
                     fechaFoto: datosAdded.fechaFoto,
-                    tituloFoto:$scope.tituloFoto,
+                    tituloFoto:datosAdded.tituloFoto,
                     img:url
                 });
             });

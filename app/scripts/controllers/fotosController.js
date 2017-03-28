@@ -65,17 +65,6 @@ angular.module('myEasyOrganicer')
             console.log('fotos', fotos);
             //   $scope.loading= false;
         };
-        $scope.desplegarFotos =function(datosCarpeta){
-            console.log('datosCarpeta', datosCarpeta)
-            // var fotos=$scope.carpetasFotos;
-            // console.log('fotos', fotos);
-            // for(var h in fotos){
-            //     if(fotos[h].fotos!== undefined){
-            //         $scope.fotos= fotos[h].fotos;
-            //     }
-            //     var fotosH= fotos[h];
-            // }
-        };
 
 
         var errorLLamada = function() {
