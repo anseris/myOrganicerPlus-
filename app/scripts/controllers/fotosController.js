@@ -133,7 +133,11 @@ angular.module('myEasyOrganicer')
 
   }]);
 
-
+  angular.module('myEasyOrganicer').filter('objectKeysLength', [function() {
+      return function(items) {
+          return Object.keys(items).length;
+      };
+  }]);
 
   // angular.module('myEasyOrganicer')
   // .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase', 'fotosService', '$filter',  function($scope, $mdDialog, $firebase, fotosService, $filter) {

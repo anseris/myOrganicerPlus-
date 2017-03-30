@@ -37,7 +37,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
         var file= datosAdded.file;
         var idFotoA= datosAdded.idCarpeta;
-        var refFoto = db.ref("fotos/carpetas/" + idFotoA + "/fotos");
+        var refFoto = db.ref("fotos/carpetas/" + idFotoA + "/archivos");
         // var listacarpetasFotos=$firebaseArray(ref);
 
         storage.child(file.name).put(file).then(function(){

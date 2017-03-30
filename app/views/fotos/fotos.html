@@ -97,6 +97,10 @@
                     <div class="subContBusq" ng-show="formatoIcons">
                         <div flex="25" layout-padding  class="bkAuto txtAlgCent contCarpeta" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos">
                             <i class="fa fa-folder-o iconoCarpeta" aria-hidden="true"></i><br>
+                            <!-- <div  ng-repeat="foto in carpeta.archivos">
+                                <span>{{ foto | objectKeysLength }}</span>
+                            </div> -->
+                            <span>{{ carpeta.archivos | objectKeysLength }}</span>
                             <span>{{carpeta.titulo}}</span>
                         </div>
                     </div>
@@ -109,7 +113,7 @@
                             <div flex="10" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
                             <div flex="10" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
                         </div>
-                        <div layout="row"  class="" layout-wrap ng-repeat="foto in carpeta.fotos" ng-show="fotos.expanded">
+                        <div layout="row"  class="" layout-wrap ng-repeat="foto in carpeta.archivos" ng-show="fotos.expanded">
                             <!-- <i  class="fa fa-folder " aria-hidden="true"></i> -->
                             <i flex="5" class="fa fa-file-image-o" aria-hidden="true"></i>
                             <div flex="75" >{{ foto.tituloFoto }}</div>
