@@ -1,0 +1,27 @@
+<md-dialog aria-label="">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>{{foto.tituloFoto}}</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <i class="fa fa-times-circle font25" aria-hidden="true"></i>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding  >
+        <div flex="100" class="subContBusq bkAuto">
+            <img flex="100" src="{{foto.img}}" class="img-responsive" alt="">
+        </div>
+    </md-dialog-content>
+
+    <!-- <md-dialog-actions layout="row">
+    style="max-height:600px;"
+        <div flex="50">
+            <md-checkbox class="md-primary" ng-model="checkVariasFotos"></md-checkbox>
+            <span>Eliminar varias fotos</span>
+        </div>
+        <md-button class="md-raised md-primary btModal" ng-disabled="!checkVariasFotos" ng-click="eliminarFotos()">Añadir foto</md-button>
+    </md-dialog-actions> -->
+
+</md-dialog>

@@ -1,0 +1,38 @@
+<md-dialog flex="55" aria-label="">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Lista de Fotos</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <i class="fa fa-times-circle font25" aria-hidden="true"></i>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding>
+        <div class="subContBusq">
+            <div flex="100" layout-padding  class="bkAuto txtAlgCent contCarpeta relative" ng-repeat="foto in carpetas.archivos">
+                <div flex="100">
+                    <span>{{foto.tituloFoto}}</span>
+                </div>
+                <div flex="100" class="contenedorFoto">
+                    <img flex="100" src="{{foto.img}}" alt="" ng-click="verFoto(foto)">
+                </div>
+                <div flex="100"   >
+                    <div flex="60" class="" ><md-checkbox class="md-primary" ng-show="checkVariasFotos"></md-checkbox></div>
+                    <div flex="20" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                    <div flex="20" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <div flex="50">
+            <md-checkbox class="md-primary" ng-model="checkVariasFotos"></md-checkbox>
+            <span>Eliminar varias fotos</span>
+        </div>
+        <md-button class="md-raised md-primary btModal" ng-disabled="!checkVariasFotos" ng-click="eliminarFotos()">Añadir foto</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

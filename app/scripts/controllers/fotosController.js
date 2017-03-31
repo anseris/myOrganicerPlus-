@@ -17,39 +17,7 @@ angular.module('myEasyOrganicer')
         var storage;
         storage = firebase.storage().ref("images");
 
-        // $scope.holad =function(){
-        //     var file=$('#file').get(0).files[0];
-        //
-        //     storage.child(file.name).put(file).then(function(){
-        //         storage.child(file.name).getDownloadURL().then(function(url){
-        //             database.push({
-        //                 img:url
-        //             })
-        //         })
-        //     })
-        // };
 
-        // $scope.abrirModalAdd = function() {
-        //     $mdDialog.show({
-        //         controller: 'mdlAddCtrl',
-        //         templateUrl: 'views/fotos/mdlAdd.html',
-        //         parent: angular.element(document.body),
-        //         clickOutsideToClose: true,
-        //         // resolve: {
-        //         //     card: function() {
-        //         //         return card;
-        //         //     },
-        //         //     client: function() {
-        //         //         return client;
-        //         //     }
-        //         // }
-        //     }).then(function(answer) {
-        //
-        //
-        //     }, function() {
-        //
-        //     });
-        // };
 
 
 
@@ -130,69 +98,78 @@ angular.module('myEasyOrganicer')
             $scope.formatoLista =true;
         };
 
+         $scope.mostarModalFotos = function(carpeta) {
+            $mdDialog.show({
+                controller: 'mdlListFotosCtrl',
+                templateUrl: 'views/fotos/mdlListFotos.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true,
+                resolve: {
+                    carpeta: function() {
+                        return carpeta;
+                    }
+                }
+            }).then(function(answer) {
+
+
+            }, function() {
+
+            });
+        };
+
 
   }]);
 
-  angular.module('myEasyOrganicer').filter('objectKeysLength', [function() {
-      return function(items) {
-          return Object.keys(items).length;
+
+
+  angular.module('myEasyOrganicer')
+  .controller('mdlListFotosCtrl', ['$scope', '$mdDialog',  'carpeta',   function($scope, $mdDialog, carpeta) {
+      console.log('carpeta', carpeta)
+      // Recuperar datos
+      $scope.carpetas= carpeta;
+
+      $scope.verFoto = function(foto) {
+         $mdDialog.show({
+             controller: 'mdlVerFotosCtrl',
+             templateUrl: 'views/fotos/mdlVerFotos.html',
+             parent: angular.element(document.body),
+             clickOutsideToClose: true,
+             resolve: {
+                 carpeta: function() {
+                     return $scope.carpetas;
+                 },
+                 foto: function() {
+                     return foto;
+                 }
+             }
+         }).then(function(answer) {
+
+
+         }, function() {
+
+         });
+     };
+
+
+
+      $scope.cancel = function() {
+          $mdDialog.cancel();
       };
+
   }]);
 
-  // angular.module('myEasyOrganicer')
-  // .controller('mdlAddCtrl', ['$scope', '$mdDialog', '$firebase', 'fotosService', '$filter',  function($scope, $mdDialog, $firebase, fotosService, $filter) {
-  //
-  //     // Recuperar datos
-  //     //   $scope.loading= true;
-  //
-  //     var datosRecuperados = function(datos) {
-  //         $scope.carpetasFotos=datos;
-  //         //   $scope.loading= false;
-  //     };
-  //     var errorLLamada = function() {
-  //     };
-  //
-  //     fotosService.recuperarCarpetas(datosRecuperados, errorLLamada);
-  //
-  //     // añadir carpetas
-  //
-  //     var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
-  //
-  //     // var datosAddOk = function(datos) {
-  //     //     $scope.carpetasFotos=datos;
-  //     // };
-  //
-  //     $scope.agregarCarpeta =function(){
-  //         var id=($scope.carpetasFotos).length + 1;
-  //
-  //         var datosAEnviar= {
-  //             idCarpeta: id,
-  //             titulo:$scope.tituloCarpeta,
-  //             fechaActual:fechaActual
-  //         }
-  //
-  //         fotosService.addCarpeta(datosAEnviar);
-  //     };
-  //
-  //     $scope.agregarFoto =function(){
-  //       //   var id=($scope.carpetasFotos).length + 1;
-  //
-  //         var datosAEnviar= {
-  //             idFoto: $scope.carpetas,
-  //             titulo:$scope.tituloFoto,
-  //             nombreFila:$scope.hola
-  //         }
-  //         console.log('datosAEnviar', datosAEnviar)
-  //       //   fotosService.addFoto(datosAEnviar);
-  //
-  //       //   fotosService.addCarpeta(datosAEnviar);
-  //     };
-  //     $scope.$watch('files.length',function(newVal,oldVal){
-  //           console.log($scope.files);
-  //       });
-  //
-  //     $scope.cancel = function() {
-  //         $mdDialog.cancel();
-  //     };
-  //
-  // }]);
+
+  angular.module('myEasyOrganicer')
+  .controller('mdlVerFotosCtrl', ['$scope', '$mdDialog',  'carpeta', 'foto', function($scope, $mdDialog, carpeta, foto) {
+      console.log('carpeta', carpeta)
+      // Recuperar datos
+      $scope.carpetas= carpeta;
+      $scope.foto= foto;
+
+
+
+      $scope.cancel = function() {
+          $mdDialog.cancel();
+      };
+
+  }]);

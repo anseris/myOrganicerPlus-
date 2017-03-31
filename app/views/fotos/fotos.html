@@ -95,13 +95,15 @@
                     </md-input-container>
 
                     <div class="subContBusq" ng-show="formatoIcons">
-                        <div flex="25" layout-padding  class="bkAuto txtAlgCent contCarpeta" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos">
+                        <div flex="25" layout-padding  class="bkAuto txtAlgCent contCarpeta relative" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" ng-click="mostarModalFotos(carpeta)">
                             <i class="fa fa-folder-o iconoCarpeta" aria-hidden="true"></i><br>
-                            <!-- <div  ng-repeat="foto in carpeta.archivos">
-                                <span>{{ foto | objectKeysLength }}</span>
-                            </div> -->
-                            <span>{{ carpeta.archivos | objectKeysLength }}</span>
+                            <div class="numFotos">
+                                <span ng-if="(carpeta.archivos | objectKeysLength) > 0">{{ carpeta.archivos | objectKeysLength }}</span>
+                                <span ng-if="carpeta.archivos===udefined">0</span>
+                                <span>Fotos</span>
+                            </div>
                             <span>{{carpeta.titulo}}</span>
+
                         </div>
                     </div>
                     <!--  -->
