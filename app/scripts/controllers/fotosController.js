@@ -8,7 +8,7 @@
  * Controller of the pruebaApp
  */
 angular.module('myEasyOrganicer')
-  .controller('fotosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', function ($scope, $mdDialog, fotosService, $filter, $firebase) {
+  .controller('fotosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', 'Lightbox', function ($scope, $mdDialog, fotosService, $filter, $firebase,Lightbox) {
 
         $scope.formatoIcons =true;
         $scope.formatoLista =false;
@@ -61,29 +61,19 @@ angular.module('myEasyOrganicer')
 
             fotosService.addCarpeta(datosAEnviar);
         };
-        // $scope.holad =function(){
-        //     var file=$('#file').get(0).files[0];
-        //
-        //     storage.child(file.name).put(file).then(function(){
-        //         storage.child(file.name).getDownloadURL().then(function(url){
-        //             database.push({
-        //                 img:url
-        //             })
-        //         })
-        //     })
-        // };
 
         $scope.agregarFoto =function(){
-
+            var idFoto = Math.floor((Math.random() * 10000) + 1);
             var fechaFoto = $filter('date')($scope.fechaFoto,'dd-MM-yyyy');
-            console.log('fecha',fechaFoto);
             var file=$('#file').get(0).files[0];
                 var datosAEnviar= {
+                    idFoto:idFoto,
                     idCarpeta: $scope.carpetas,
                     fechaIntroduccionFoto:fechaActual,
                     fechaFoto: fechaFoto,
                     tituloFoto:$scope.tituloFoto,
-                    file:file
+                    file:file,
+                    chequeado:false
                 };
             fotosService.addFoto(datosAEnviar);
         };
@@ -117,54 +107,60 @@ angular.module('myEasyOrganicer')
             });
         };
 
+        $scope.fotos= [];
+        $scope.verFoto = function (foto,index) {
+
+            for (var a in foto.archivos) {
+                $scope.fotos.push(foto.archivos[a].img);
+            }
+          Lightbox.openModal($scope.fotos, index);
+        };
+
+        $scope.eliminarCarpeta= function(carpeta){
+            var claveCarpeta =carpeta.$id;
+             fotosService.deleteCarpetas(claveCarpeta);
+        }
+        $scope.eliminarFoto= function(carpeta,  foto){
+            var claveCarpeta =carpeta.$id;
+            var idFoto =foto.idFoto;
+            fotosService.deleteFotos(claveCarpeta, idFoto);
+        }
+
+
+
 
   }]);
 
 
 
-  angular.module('myEasyOrganicer')
-  .controller('mdlListFotosCtrl', ['$scope', '$mdDialog',  'carpeta',   function($scope, $mdDialog, carpeta) {
-      console.log('carpeta', carpeta)
+angular.module('myEasyOrganicer')
+.controller('mdlListFotosCtrl', ['$scope', '$mdDialog',  'carpeta', 'Lightbox', 'fotosService', function($scope, $mdDialog, carpeta, Lightbox, fotosService) {
+    console.log('carpeta', carpeta)
       // Recuperar datos
-      $scope.carpetas= carpeta;
+    $scope.carpetas= carpeta;
+    $scope.fotos= [];
+    $scope.verFoto = function (index) {
+        for (var a in $scope.carpetas.archivos) {
+            $scope.fotos.push($scope.carpetas.archivos[a].img);
+        }
+        Lightbox.openModal($scope.fotos, index);
+    };
 
-      $scope.verFoto = function(foto) {
-         $mdDialog.show({
-             controller: 'mdlVerFotosCtrl',
-             templateUrl: 'views/fotos/mdlVerFotos.html',
-             parent: angular.element(document.body),
-             clickOutsideToClose: true,
-             resolve: {
-                 carpeta: function() {
-                     return $scope.carpetas;
-                 },
-                 foto: function() {
-                     return foto;
-                 }
-             }
-         }).then(function(answer) {
+    $scope.eliminarVariasFotos= function(carpeta,fotos){
+        var claveCarpeta =carpeta.$id;
+        var fotos =fotos;
+        fotosService.deleteVariasFotos(claveCarpeta, fotos);
+    }
 
+    $scope.cancel = function() {
+        $mdDialog.cancel();
+    };
 
-         }, function() {
-
-         });
-     };
-
-
-
-      $scope.cancel = function() {
-          $mdDialog.cancel();
-      };
-
-  }]);
+}]);
 
 
   angular.module('myEasyOrganicer')
   .controller('mdlVerFotosCtrl', ['$scope', '$mdDialog',  'carpeta', 'foto', function($scope, $mdDialog, carpeta, foto) {
-      console.log('carpeta', carpeta)
-      // Recuperar datos
-      $scope.carpetas= carpeta;
-      $scope.foto= foto;
 
 
 

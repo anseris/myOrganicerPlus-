@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngMaterial',
-    'firebase'
+    'firebase',
+    'bootstrapLightbox'
   ])
   .config(function ($routeProvider) {
     $routeProvider

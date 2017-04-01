@@ -30,8 +30,11 @@
 .font20 {
   font-size: 20px !important;
 }
-.txtAlgCent {
+.alingCenter {
   text-align: center;
+}
+.alingLeft {
+  text-align: left;
 }
 .mgTop10 {
   margin-top: 10px;
@@ -2974,16 +2977,11 @@ md-checkbox {
 }
 .formatoLista {
   margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
 }
 .formatoLista i {
-  font-size: 20px !important;
-}
-.formatoListaFoto {
-  margin-top: 10px;
-  margin-left: 10px;
-}
-.formatoListaFoto i {
-  font-size: 20px !important;
+  font-size: 24px !important;
 }
 .md-block i {
   font-size: 20px !important;
@@ -2992,5 +2990,20 @@ md-checkbox {
 .numFotos {
   position: absolute;
   top: 50px;
-  left: 36px;
+  left: 47px;
+}
+.contenedorListaFotos {
+  margin: 5px 0 0 10px;
+  font-size: 14px;
+}
+.contenedorListaFotos i {
+  font-size: 20px !important;
+}
+.contenedorFoto {
+  width: 100%;
+  height: 130px;
+  background-color: #607d8b;
+}
+.contenedorFoto img {
+  height: 100%;
 }

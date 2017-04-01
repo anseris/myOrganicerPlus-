@@ -11,17 +11,17 @@
 
     <md-dialog-content layout-padding>
         <div class="subContBusq">
-            <div flex="100" layout-padding  class="bkAuto txtAlgCent contCarpeta relative" ng-repeat="foto in carpetas.archivos">
+            <div flex="100" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="foto in carpetas.archivos">
                 <div flex="100">
                     <span>{{foto.tituloFoto}}</span>
                 </div>
-                <div flex="100" class="contenedorFoto">
-                    <img flex="100" src="{{foto.img}}" alt="" ng-click="verFoto(foto)">
+                <div flex="100" class="contenedorFoto" ng-click="verFoto($index)">
+                    <img flex="100" src="{{foto.img}}" alt="" >
                 </div>
-                <div flex="100"   >
-                    <div flex="60" class="" ><md-checkbox class="md-primary" ng-show="checkVariasFotos"></md-checkbox></div>
-                    <div flex="20" class="txtAlgCent"><i class="fa fa-trash" aria-hidden="true"></i></div>
-                    <div flex="20" class="txtAlgCent"><i class="fa fa-pencil" ></i></div>
+                <div flex="100"   layout="row">
+                    <div flex="60" class="" ><md-checkbox class="md-primary" ng-show="checkVariasFotos" ng-model="foto.chequeado"></md-checkbox></div>
+                    <div flex="20" class="alingCenter"><i class="fa fa-trash" aria-hidden="true"></i></div>
+                    <div flex="20" class="alingCenter"><i class="fa fa-pencil" ></i></div>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
             <md-checkbox class="md-primary" ng-model="checkVariasFotos"></md-checkbox>
             <span>Eliminar varias fotos</span>
         </div>
-        <md-button class="md-raised md-primary btModal" ng-disabled="!checkVariasFotos" ng-click="eliminarFotos()">Añadir foto</md-button>
+        <md-button class="md-raised md-primary btModal" ng-disabled="!checkVariasFotos" ng-click="eliminarVariasFotos(carpetas,carpetas.archivos)">Añadir foto</md-button>
     </md-dialog-actions>
 
 </md-dialog>
