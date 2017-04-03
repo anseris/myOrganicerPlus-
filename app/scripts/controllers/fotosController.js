@@ -145,6 +145,31 @@ angular.module('myEasyOrganicer')
             });
         }
 
+        $scope.editarFoto= function(carpeta, foto, carpetas){
+            $mdDialog.show({
+                controller: 'mdlEditFotoCtrl',
+                templateUrl: 'views/fotos/mdlEditarFotos.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true,
+                resolve: {
+                    carpeta: function() {
+                        return carpeta;
+                    },
+                    foto: function() {
+                        return foto;
+                    },
+                    carpetas: function() {
+                        return carpetas;
+                    }
+                }
+            }).then(function(answer) {
+
+
+            }, function() {
+
+            });
+        }
+
 
 
 
@@ -187,7 +212,12 @@ angular.module('myEasyOrganicer')
     console.log('carpeta', carpeta.hola)
 
     $scope.actualizarCarpeta = function() {
-        var fechaCarpeta = $filter('date')($scope.carpeta.newFechaCarpeta,'dd-MM-yyyy');
+        if($scope.carpeta.newFechaCarpeta===undefined){
+            var fechaCarpeta = $scope.carpeta.fechaCarpeta;
+        }
+        else{
+            var fechaCarpeta = $filter('date')($scope.carpeta.newFechaCarpeta,'dd-MM-yyyy');
+        }
         var idCarpeta= $scope.carpeta.$id;
 
         var datosAEnviar= {
@@ -201,8 +231,51 @@ angular.module('myEasyOrganicer')
     };
 
 
+
+
     $scope.cancel = function() {
         $mdDialog.cancel();
     };
+
+}]);
+
+
+angular.module('myEasyOrganicer')
+.controller('mdlEditFotoCtrl', ['$scope', '$mdDialog',  'carpeta', 'foto', 'carpetas', 'fotosService', '$filter', function($scope, $mdDialog, carpeta, foto, carpetas, fotosService, $filter) {
+
+  $scope.carpeta=carpeta;
+  $scope.foto=foto;
+  $scope.carpetas=carpetas;
+
+  console.log('carpeta', $scope.carpetas)
+
+  var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+  // console.log('carpeta', carpeta.hola)
+
+
+
+  $scope.actualizarFoto =function(){
+      console.log('carpeta', $scope.carpeta)
+      console.log('foto', $scope.foto.idFoto)
+      var idFoto = $scope.foto.idFoto;
+      var fechaFoto = $filter('date')($scope.newFechaFoto,'dd-MM-yyyy');
+          var datosAEnviar= {
+              idFoto:idFoto,
+              idCarpeta: $scope.carpetasMdl,
+              fechaIntroduccionFoto:fechaActual,
+              fechaFoto: fechaFoto,
+              tituloFoto:$scope.foto.tituloFoto,
+              img:$scope.foto.img,
+              chequeado:false
+          };
+
+          console.log('datosAEnviardddddd', $scope.foto.idFoto)
+    fotosService.actualizarFoto(datosAEnviar);
+  };
+
+
+  $scope.cancel = function() {
+      $mdDialog.cancel();
+  };
 
 }]);

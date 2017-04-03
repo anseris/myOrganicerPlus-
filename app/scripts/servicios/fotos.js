@@ -62,6 +62,29 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         });
     };
 
+    var actualizarFoto = function(datosAdded) {
+        console.log('datosAdded', datosAdded)
+
+        // var file= datosAdded.file;
+        var idFotoA= datosAdded.idCarpeta;
+        var refActFoto = db.ref("fotos/carpetas/" + idFotoA + "/archivos");
+        // var listacarpetasFotos=$firebaseArray(ref);
+
+        // storage.child(file.name).put(file).then(function(){
+            // storage.child(file.name).getDownloadURL().then(function(url){
+                refActFoto.update({
+                    idFoto:datosAdded.idFoto,
+                    idCarpeta: datosAdded.idCarpeta,
+                    fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
+                    fechaFoto: datosAdded.fechaFoto,
+                    tituloFoto:datosAdded.tituloFoto,
+                    img:datosAdded.img,
+                    chequeado:datosAdded.chequeado
+                });
+            // });
+        // });
+    };
+
     var deleteCarpetas = function(idCarpeta){
         var deleteCarpeta = db.ref("fotos/carpetas/" + idCarpeta);
         deleteCarpeta.remove();
@@ -119,7 +142,8 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         deleteCarpetas:deleteCarpetas,
         deleteFotos:deleteFotos,
         deleteVariasFotos:deleteVariasFotos,
-        actualizarCarpeta:actualizarCarpeta
+        actualizarCarpeta:actualizarCarpeta,
+        actualizarFoto:actualizarFoto
 
     };
 }]);
