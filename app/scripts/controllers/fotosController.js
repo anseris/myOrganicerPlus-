@@ -126,6 +126,25 @@ angular.module('myEasyOrganicer')
             fotosService.deleteFotos(claveCarpeta, idFoto);
         }
 
+        $scope.editarCarpeta= function(carpeta){
+            $mdDialog.show({
+                controller: 'mdlEditCarpetaCtrl',
+                templateUrl: 'views/fotos/mdlEditarCarpeta.html',
+                parent: angular.element(document.body),
+                clickOutsideToClose: true,
+                resolve: {
+                    carpeta: function() {
+                        return carpeta;
+                    }
+                }
+            }).then(function(answer) {
+
+
+            }, function() {
+
+            });
+        }
+
 
 
 
@@ -160,12 +179,30 @@ angular.module('myEasyOrganicer')
 
 
   angular.module('myEasyOrganicer')
-  .controller('mdlVerFotosCtrl', ['$scope', '$mdDialog',  'carpeta', 'foto', function($scope, $mdDialog, carpeta, foto) {
+  .controller('mdlEditCarpetaCtrl', ['$scope', '$mdDialog',  'carpeta', 'fotosService', '$filter', function($scope, $mdDialog, carpeta, fotosService, $filter) {
+
+    $scope.carpeta=carpeta;
+
+    var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+    console.log('carpeta', carpeta.hola)
+
+    $scope.actualizarCarpeta = function() {
+        var fechaCarpeta = $filter('date')($scope.carpeta.newFechaCarpeta,'dd-MM-yyyy');
+        var idCarpeta= $scope.carpeta.$id;
+
+        var datosAEnviar= {
+            idCarpeta: $scope.carpeta.idCarpeta,
+            titulo:$scope.carpeta.titulo,
+            fechaActual:fechaActual,
+            fechaCarpeta:fechaCarpeta
+        };
+
+        fotosService.actualizarCarpeta(datosAEnviar, idCarpeta);
+    };
 
 
+    $scope.cancel = function() {
+        $mdDialog.cancel();
+    };
 
-      $scope.cancel = function() {
-          $mdDialog.cancel();
-      };
-
-  }]);
+}]);

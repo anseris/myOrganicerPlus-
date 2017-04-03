@@ -27,7 +27,6 @@
                                         <md-datepicker ng-model="fechaCarpeta"></md-datepicker>
                                     </md-input-container>
                                 </div>
-
                                 <!-- <md-dialog-actions layout="row"> -->
                                 <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir carpeta</md-button>
                                 <!-- </md-dialog-actions> -->
@@ -116,7 +115,7 @@
                             <div flex="15" >{{ carpeta.fechaCarpeta }}</div>
                             <!-- <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div> -->
                             <div flex="10" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarCarpeta(carpeta)"></i></div>
-                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ></i></div>
+                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ng-click="editarCarpeta(carpeta)"></i></div>
                         </div>
                         <div layout="row"  class="contenedorListaFotos" layout-wrap ng-repeat="foto in carpeta.archivos" ng-show="carpeta.expanded">
                             <i flex="5" class="fa fa-file-image-o" aria-hidden="true"></i>
@@ -127,7 +126,7 @@
                             <div flex="15" >{{ foto.fechaFoto }}</div>
                             <!-- <div flex="10" class="txtAlgCent"><md-checkbox class="md-primary"></md-checkbox></div> -->
                             <div flex="10" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarFoto(carpeta, foto)"></i></div>
-                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ></i></div>
+                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ng-click="editarFoto(carpeta, foto)"></i></div>
                         </div>
                     </div>
                 </md-content>

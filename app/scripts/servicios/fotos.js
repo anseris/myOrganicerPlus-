@@ -31,7 +31,13 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
     var addCarpeta = function(datosAdded) {
         ref.push().set(datosAdded);
     };
-    var fotoKey=""
+
+
+
+    var actualizarCarpeta = function(datosAdded, idCarpeta) {
+        var refActCarp = db.ref("fotos/carpetas/" + idCarpeta);
+        refActCarp.update(datosAdded);
+    };
 
     var addFoto = function(datosAdded) {
         console.log('datosAdded', datosAdded)
@@ -112,7 +118,8 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         addFoto:addFoto,
         deleteCarpetas:deleteCarpetas,
         deleteFotos:deleteFotos,
-        deleteVariasFotos:deleteVariasFotos
+        deleteVariasFotos:deleteVariasFotos,
+        actualizarCarpeta:actualizarCarpeta
 
     };
 }]);

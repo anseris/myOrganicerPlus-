@@ -1,0 +1,32 @@
+<md-dialog flex="50" aria-label="">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Editar la carpeta "{{foto.tituloFoto}}"</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <i class="fa fa-times-circle font25" aria-hidden="true"></i>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding  >
+        <md-content class="md-padding">
+            <div layout-gt-xs="row">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Nombre de la carpeta</label>
+                    <input ng-model="carpeta.titulo">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Nueva Fecha</label>
+                    <md-datepicker ng-model="carpeta.newFechaCarpeta"></md-datepicker>
+                </md-input-container>
+            </div>
+        </md-content>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <md-button class="md-raised md-primary btModal" ng-click="actualizarCarpeta()">Añadir carpeta</md-button>
+    </md-dialog-actions>
+
+</md-dialog>
