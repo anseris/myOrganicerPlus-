@@ -62,27 +62,62 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         });
     };
 
-    var actualizarFoto = function(datosAdded) {
+    var actualizarFoto = function(datosAdded, ubicCarpeta, idCarpetaOrig) {
         console.log('datosAdded', datosAdded)
+        console.log('ubicCarpeta', ubicCarpeta)
 
         // var file= datosAdded.file;
         var idFotoA= datosAdded.idCarpeta;
-        var refActFoto = db.ref("fotos/carpetas/" + idFotoA + "/archivos");
-        // var listacarpetasFotos=$firebaseArray(ref);
+        var refActFoto = db.ref("fotos/carpetas/" + idFotoA + "/archivos/");
+        if(ubicCarpeta==='otraCarpeta'){
+            console.log('ubicCarpeta otra', ubicCarpeta)
+            refActFoto.push({
+                idFoto:datosAdded.idFoto,
+                idCarpeta: datosAdded.idCarpeta,
+                fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
+                fechaFoto: datosAdded.fechaFoto,
+                tituloFoto:datosAdded.tituloFoto,
+                img:datosAdded.img,
+                chequeado:datosAdded.chequeado
+            });
+            deleteFotos(idCarpetaOrig, datosAdded.idFoto);
 
-        // storage.child(file.name).put(file).then(function(){
-            // storage.child(file.name).getDownloadURL().then(function(url){
-                refActFoto.update({
-                    idFoto:datosAdded.idFoto,
-                    idCarpeta: datosAdded.idCarpeta,
-                    fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
-                    fechaFoto: datosAdded.fechaFoto,
-                    tituloFoto:datosAdded.tituloFoto,
-                    img:datosAdded.img,
-                    chequeado:datosAdded.chequeado
-                });
-            // });
-        // });
+        }
+        var archivos={};
+        refActFoto.on('value',function(datos){
+        	archivos=datos.val();
+            angular.forEach(archivos, function(indice,valor) {
+                console.log('indice', indice);
+                console.log('valor', valor)
+                console.log('datosAdded.idFoto', datosAdded.idFoto)
+                if(indice.idFoto===datosAdded.idFoto){
+                    var idFotoUni=valor;
+                    var refActDefFoto = db.ref("fotos/carpetas/" + idFotoA + "/archivos/"+ idFotoUni);
+                    // var deleteActuFoto= funcion(){
+                    //     var refDelDefFoto = db.ref("fotos/carpetas/" + idCarpetaOrig + "/archivos/"+ idFotoUni);
+                    //     console.log('ubicCarpeta misma', ubicCarpeta)
+                    //     refDelDefFoto.remove();
+                    // }
+                    if(ubicCarpeta==='mismaCarpeta'){
+                        console.log('ubicCarpeta misma', ubicCarpeta)
+                        refActDefFoto.update({
+                            idFoto:datosAdded.idFoto,
+                            idCarpeta: datosAdded.idCarpeta,
+                            fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
+                            fechaFoto: datosAdded.fechaFoto,
+                            tituloFoto:datosAdded.tituloFoto,
+                            img:datosAdded.img,
+                            chequeado:datosAdded.chequeado
+                        });
+                    }
+
+
+
+
+                }
+            });
+        });
+
     };
 
     var deleteCarpetas = function(idCarpeta){

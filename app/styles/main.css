@@ -3007,3 +3007,8 @@ md-checkbox {
 .contenedorFoto img {
   height: 100%;
 }
+.iconoCarpetaCarrusel {
+  font-size: 100px !important;
+  color: #607d8b;
+  height: 100px;
+}

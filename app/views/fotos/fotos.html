@@ -1,8 +1,8 @@
-<md-content class="bkAuto height100 bgFotos" layout-padding ng-controller="fotosCtrl">
+<md-content class="height100 bgFotos" layout-padding ng-controller="fotosCtrl">
     <div flex="95" class="bkAuto contenedorFotos" layout="row">
         <!-- <div flex="100" layout-padding layout-margin layout="row" class="botones"> -->
-        <div flex="50">
-            <div flex="95" class="add" ng-click="abrirModalAdd()" layout="row">
+        <div flex="50" ng-init="add.expanded=false">
+            <div flex="95" class="add" ng-click="add.expanded=!add.expanded" layout="row">
                 <div flex="10" class="contenedorIcons">
                     <i class="fa fa-plus font40" aria-hidden="true"></i>
                 </div>
@@ -10,7 +10,7 @@
                     <span>Añadir fotos</span>
                 </div>
             </div>
-            <div flex="95" class="estilosFormularioAdd" layout="row">
+            <div flex="95" class="estilosFormularioAdd" layout="row" ng-show="add.expanded">
                 <form name="fotosForm" flex="100">
                     <md-tabs  md-dynamic-height md-border-bottom class="tabModal">
 
@@ -53,9 +53,10 @@
                                 </md-input-container>
                                 <div flex="100" class="mgTop10" layout="row">
                                     <div flex="60" class="mgTop10">
-                                        <input class="ng-hide" id="file" type="file" />
+                                        <input class="ng-hide" id="file" type="file" name="archivoFoto"  />
                                         <label for="file" class="md-button md-fab md-mini md-primary md-hue-2"><i class="fa fa-upload" aria-hidden="true"></i></label>
-                                        <span>Agrega la fotografia</span>
+                                        <span ng-if="!fotoAgregada">Agrega la fotografia</span>
+                                        <span ng-if="fotoAgregada">Fotografia agregada</span>
                                     </div>
                                     <div flex="40" class="">
                                         <md-input-container>
@@ -75,8 +76,8 @@
             </div>
 
         </div>
-        <div flex="50">
-            <div flex="95" class="search" ng-click="abrirModalAdd()" layout="row">
+        <div flex="50" ng-init="buscador.expanded=false">
+            <div flex="95" class="search" layout="row" ng-click="buscador.expanded=!buscador.expanded" >
                 <div flex="10" class="contenedorIcons">
                     <i class="fa fa-search font40" aria-hidden="true"></i>
                 </div>
@@ -84,7 +85,7 @@
                     <span>Buscar fotos</span>
                 </div>
             </div>
-            <div flex="95" class="estilosFormularioSearch" layout="row">
+            <div flex="95" class="estilosFormularioSearch" layout="row" ng-show="buscador.expanded">
                 <md-content class="md-padding  contenedorBuscador">
                     <md-input-container flex="100" class="md-block">
                         <label>Busca foto o carpeta</label>
@@ -135,5 +136,19 @@
         </div>
         <!-- </div> -->
     </div>
+    <!-- <div flex="100" class="carrusel"> -->
+        <div  class="" ng-show="formatoIcons"  layout="row">
+            <div  layout-padding  class="alingCenter  relative" ng-repeat="carpeta in carpetasFotos"  layout="row" ng-click="mostarModalFotos(carpeta)">
+                <i class="fa fa-folder-o iconoCarpetaCarrusel" aria-hidden="true"></i><br>
+                <div class="numFotos">
+                    <span ng-if="(carpeta.archivos | objectKeysLength) > 0">{{ carpeta.archivos | objectKeysLength }}</span>
+                    <span ng-if="carpeta.archivos===udefined">0</span>
+                    <span>Fotos</span>
+                </div>
+                <span>{{carpeta.titulo}}</span>
+
+            </div>
+        <!-- </div> -->
+    <!-- </div> -->
 
 </md-content>

@@ -12,6 +12,8 @@ angular.module('myEasyOrganicer')
 
         $scope.formatoIcons =true;
         $scope.formatoLista =false;
+        $scope.fotoAgregada =false;
+
 
         // var database = firebase.database().ref("fotos/carpetas");
         var storage;
@@ -61,10 +63,26 @@ angular.module('myEasyOrganicer')
 
             fotosService.addCarpeta(datosAEnviar);
         };
+        $scope.comprobarInpFile= function(){
+            var file=$('#file').get(0).files[0];
+            if(file!==undefined){
+                $scope.fotoAgregada = true;
+            }
+        }
+
+
+        $scope.$watch($scope.comprobarInpFile);
+
 
         $scope.agregarFoto =function(){
             var idFoto = Math.floor((Math.random() * 10000) + 1);
-            var fechaFoto = $filter('date')($scope.fechaFoto,'dd-MM-yyyy');
+            if($scope.fechaFoto===undefined){
+                var fechaFoto = fechaActual;
+            }
+            else{
+                var fechaFoto = $filter('date')($scope.fechaFoto,'dd-MM-yyyy');
+            }
+            // var fechaFoto = $filter('date')($scope.fechaFoto,'dd-MM-yyyy');
             var file=$('#file').get(0).files[0];
                 var datosAEnviar= {
                     idFoto:idFoto,
@@ -190,6 +208,12 @@ angular.module('myEasyOrganicer')
         Lightbox.openModal($scope.fotos, index);
     };
 
+    $scope.eliminarFoto= function(carpeta,  foto){
+        var claveCarpeta =carpeta.$id;
+        var idFoto =foto.idFoto;
+        fotosService.deleteFotos(claveCarpeta, idFoto);
+    }
+
     $scope.eliminarVariasFotos= function(carpeta,fotos){
         var claveCarpeta =carpeta.$id;
         var fotos =fotos;
@@ -255,10 +279,15 @@ angular.module('myEasyOrganicer')
 
 
   $scope.actualizarFoto =function(){
+      if($scope.newFechaFoto===undefined){
+          var fechaFoto = $scope.foto.fechaFoto;
+      }
+      else{
+          var fechaFoto = $filter('date')($scope.newFechaFoto,'dd-MM-yyyy');
+      }
       console.log('carpeta', $scope.carpeta)
       console.log('foto', $scope.foto.idFoto)
       var idFoto = $scope.foto.idFoto;
-      var fechaFoto = $filter('date')($scope.newFechaFoto,'dd-MM-yyyy');
           var datosAEnviar= {
               idFoto:idFoto,
               idCarpeta: $scope.carpetasMdl,
@@ -270,7 +299,13 @@ angular.module('myEasyOrganicer')
           };
 
           console.log('datosAEnviardddddd', $scope.foto.idFoto)
-    fotosService.actualizarFoto(datosAEnviar);
+    if($scope.carpeta.$id=== $scope.carpetasMdl){
+        fotosService.actualizarFoto(datosAEnviar, 'mismaCarpeta', $scope.carpeta.$id);
+    }
+    else{
+        fotosService.actualizarFoto(datosAEnviar, 'otraCarpeta', $scope.carpeta.$id);
+    }
+
   };
 
 

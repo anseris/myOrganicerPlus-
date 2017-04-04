@@ -19,9 +19,8 @@
                     <img flex="100" src="{{foto.img}}" alt="" >
                 </div>
                 <div flex="100"   layout="row">
-                    <div flex="60" class="" ><md-checkbox class="md-primary" ng-show="checkVariasFotos" ng-model="foto.chequeado"></md-checkbox></div>
-                    <div flex="20" class="alingCenter"><i class="fa fa-trash" aria-hidden="true"></i></div>
-                    <div flex="20" class="alingCenter"><i class="fa fa-pencil" ></i></div>
+                    <div flex="80" class="" ><md-checkbox class="md-primary" ng-show="checkVariasFotos" ng-model="foto.chequeado"></md-checkbox></div>
+                    <div flex="20" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarFoto(carpetas, foto)"></i></div>
                 </div>
             </div>
         </div>
