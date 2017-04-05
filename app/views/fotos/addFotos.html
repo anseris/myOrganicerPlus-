@@ -1,0 +1,43 @@
+<div flex="90" class="add mgTop70 bkAuto " ng-controller="fotosCtrl">
+    <form name="fotosForm" flex="100">
+        <md-content class="md-padding">
+            <div class="cabecera md-padding" >
+                <span>Añadir Fotos</span>
+            </div>
+            <div  class="md-padding">
+
+
+                <md-input-container class="md-block">
+                    <label class="labelInput">Nombre de la foto</label>
+                    <input ng-model="tituloFoto">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label class="labelInput">Elige carpeta de ubicacion</label>
+                    <md-select name="carpetas" ng-model="carpetas">
+                        <md-option
+                        ng-repeat="carpeta in carpetasFotos"
+                        ng-value="carpeta.$id">
+                        {{carpeta.titulo}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <div flex="100" class="mgTop10" layout="row">
+                    <div flex="60" class="mgTop10">
+                        <input class="ng-hide" id="file" type="file" name="archivoFoto"  />
+                        <label for="file" class="md-button md-fab md-mini md-primary md-hue-2"><i class="fa fa-upload" aria-hidden="true"></i></label>
+                        <span ng-if="!fotoAgregada">Agrega la fotografia</span>
+                        <span ng-if="fotoAgregada">Fotografia agregada</span>
+                    </div>
+                    <div flex="40" class="">
+                        <md-input-container>
+                            <label>Enter date</label>
+                            <md-datepicker ng-model="fechaFoto"></md-datepicker>
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+            <md-button class="md-raised md-primary btModal" ng-click="agregarFoto()">Añadir foto</md-button>
+        </md-content>
+    </form>
+</div>

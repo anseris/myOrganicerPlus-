@@ -1,0 +1,31 @@
+<div flex="90" class="add mgTop100 bkAuto " ng-controller="fotosCtrl">
+    <form name="carpetasForm" flex="100">
+        <md-content class="md-padding">
+            <div class="cabecera md-padding" >
+                <span>Añadir Carpetas</span>
+            </div>
+            <div layout-gt-xs="row" class="md-padding">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Nombre de la carpeta</label>
+                    <input ng-model="tituloCarpeta">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Enter date</label>
+                    <md-datepicker ng-model="fechaCarpeta"></md-datepicker>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <div flex="70" class="mensaje" ng-if="mensaje">
+                    <span>{{textoMensaje}}</span>
+                </div>
+                    <div flex="30">
+                        {{mensaje}}
+                <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir carpeta</md-button>
+                </div>
+            </div>
+
+
+        </md-content>
+    </form>
+</div>

@@ -28,8 +28,15 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
     };
 
 
-    var addCarpeta = function(datosAdded) {
-        ref.push().set(datosAdded);
+    var addCarpeta = function(datosAdded, callback) {
+        ref.push().set(datosAdded, function(error){
+            if(error){
+                console.log('error')
+            }
+            else{
+                callback();
+            }
+        });
     };
 
 

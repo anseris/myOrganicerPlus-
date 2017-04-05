@@ -10,9 +10,33 @@
 angular.module('myEasyOrganicer')
   .controller('fotosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', 'Lightbox', function ($scope, $mdDialog, fotosService, $filter, $firebase,Lightbox) {
 
-        $scope.formatoIcons =true;
-        $scope.formatoLista =false;
-        $scope.fotoAgregada =false;
+    $scope.formatoIcons =true;
+    $scope.formatoLista =false;
+    $scope.fotoAgregada =false;
+
+    $scope.addCarpetaExpanded =false;
+    $scope.addFotoExpanded =false;
+    $scope.searchExpanded =false;
+
+    // $scope.mensaje=false;
+
+
+    $scope.expandedCarpeta= function(){
+        $scope.addCarpetaExpanded =!$scope.addCarpetaExpanded;
+        $scope.addFotoExpanded =false;
+        $scope.searchExpanded =false;
+    };
+
+    $scope.expandedFoto= function(){
+        $scope.addFotoExpanded =!$scope.addFotoExpanded;
+        $scope.addCarpetaExpanded =false;
+        $scope.searchExpanded =false;
+    };
+    $scope.expandedSearch= function(){
+        $scope.searchExpanded =!$scope.searchExpanded;
+        $scope.addCarpetaExpanded =false;
+        $scope.addFotoExpanded =false;
+    };
 
 
         // var database = firebase.database().ref("fotos/carpetas");
@@ -45,11 +69,21 @@ angular.module('myEasyOrganicer')
         // añadir carpetas
 
         var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+$scope.textoMensaje='La Carpeta se ha guardado correctamte';
+        $scope.agregarCarpetaOK= function(){
 
-        // var datosAddOk = function(datos) {
-        //     $scope.carpetasFotos=datos;
-        // };
 
+            // setTimeout(function() {
+                $scope.mensaje=true;
+                console.log('jjklejdkkljkldk', $scope.mensaje)
+            //
+            // }, 5000)
+            // $scope.mensaje=false;
+            // $scope.tituloCarpeta='';
+            // $scope.fechaCarpeta='';
+
+
+        }
         $scope.agregarCarpeta =function(){
             var id=($scope.carpetasFotos).length + 1;
             var fechaCarpeta = $filter('date')($scope.fechaCarpeta,'dd-MM-yyyy');
@@ -61,7 +95,7 @@ angular.module('myEasyOrganicer')
                 fechaCarpeta:fechaCarpeta
             };
 
-            fotosService.addCarpeta(datosAEnviar);
+            fotosService.addCarpeta(datosAEnviar, $scope.agregarCarpetaOK);
         };
         $scope.comprobarInpFile= function(){
             var file=$('#file').get(0).files[0];

@@ -2,45 +2,130 @@
     background-color: @fondoFotos;
     color:@blanco;
 }
-.contenedorFotos{
 
+// Pagina principal Fotos
+.iconoCarpeta{
+    font-size: 150px !important;
+    color: @cabeceraModal;
+    height: 100px;
+    text-shadow: 2px 2px #ff0000;
+}
+
+.iconoFotoGrande{
+    font-size: 130px !important;
+    color: @cabeceraModal;
+    height: 100px;
+    text-shadow: 2px 2px #ff0000;
+}
+
+.contetIconFoto{
+    margin-top: 240px;
+}
+.contetIconLupa{
+    margin-top: 180px;
+    text-align: right;
+}
+
+.iconMasCarpetas{
+    position: absolute;
+    font-size: 65px;
+    top:47px;
+    left:46px;
+    color:  @fondoFotos;
+}
+.iconMasFotos{
+    position: absolute;
+    font-size: 50px;
+    top:53px;
+    left:68px;
+    color:  @fondoFotos;
 }
 
 .add{
-    border:3px solid;
+    overflow: hidden;
+    .cabecera{
+        border-bottom:3px solid;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    md-content.md-default-theme, md-content{
+        background-color: @fondoFotos !important;
+        color:@cabeceraModal;
+        border: 3px solid @cabeceraModal;
+    }
 }
 
 .search{
-    border:3px solid;
-    margin-left: 5%;
+    overflow: hidden;
+    .cabecera{
+        border-bottom:3px solid;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    md-content.md-default-theme, md-content{
+        background-color: @fondoFotos !important;
+        color:@cabeceraModal;
+        border: 3px solid @cabeceraModal;
+        height: 500px;
+    }
 }
 
-.contenedorIcons{
-    border-right:3px solid;
-    padding: 7px;
-    text-align: center;
+.contPrinc{
+    md-content.md-default-theme, md-content{
+        background-color: @fondoFotos !important;
+        color:@cabeceraModal;
+        text-align: center;
+    }
+    .fuentePrinc{
+        font-size: 160px;
+        font: bold;
+        font-family: serif;
+        font-style: oblique;
+        text-shadow: 2px 2px #ff0000;
+        opacity: 0.5;
+    }
+    .fuentePrinc1{
+        font-size: 200px;
+        font: bold;
+        font-family: serif;
+        font-style: oblique;
+        text-shadow: 2px 2px #ff0000;
+        opacity: 0.5;
+    }
 }
 
-.pseudoBoton{
-    line-height: 50px;
-    text-align: center;
+.mgTop100{
+    margin-top: 100px;
 }
-.estilosFormularioAdd{
-    border: 3px solid;
+.mgTop70{
+    margin-top: 70px;
 }
+
+// Contenedor principal
+
+// Contenedor search
+// .search{
+//     border:3px solid;
+//     margin-left: 5%;
+// }
+
+.iconoCarpetaSearch{
+    font-size: 100px !important;
+    color: @cabeceraModal;
+    height: 100px;
+}
+
+
+
+
+
+
+
 .estilosFormularioSearch{
     border: 3px solid;
     margin-left: 5%;
-}
-.estilosBuscador{
-    border: 3px solid;
-    // width: 88%;
-
-}
-.contenedorBuscador{
-    width: 100%;
-    background-color: @fondoFotos;
-    color:@cabeceraModal;
 }
 .subContBusq{
     clear:both;
@@ -75,8 +160,9 @@
 }
 
 .contenedorListaFotos{
-    margin: 5px 0 0 10px;
+    margin: 5px 0 0 15px;
     font-size: 14px;
+    opacity: 0.7;
     i{
         font-size:20px !important;
     }
@@ -92,8 +178,16 @@
 
 }
 
-.iconoCarpetaCarrusel{
-    font-size: 100px !important;
-    color: @cabeceraModal;
-    height: 100px;
+.contenedorResultados{
+    margin-top: 20px;
+    height: 297px;
+    overflow: auto;
+}
+
+.mensaje{
+    padding-top: 10px;
+    border:2px solid green;
+    color:green;
+    text-align: center
+    background-color: rgba(20,178,120,.3);
 }

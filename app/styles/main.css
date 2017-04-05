@@ -44,11 +44,6 @@
   float: right;
   margin-top: 5px;
 }
-.iconoCarpeta {
-  font-size: 100px !important;
-  color: #607d8b;
-  height: 100px;
-}
 .fltLeft {
   float: left;
 }
@@ -2935,36 +2930,106 @@ md-checkbox {
   background-color: #ff9800;
   color: #ffffff;
 }
+.iconoCarpeta {
+  font-size: 150px !important;
+  color: #607d8b;
+  height: 100px;
+  text-shadow: 2px 2px #ff0000;
+}
+.iconoFotoGrande {
+  font-size: 130px !important;
+  color: #607d8b;
+  height: 100px;
+  text-shadow: 2px 2px #ff0000;
+}
+.contetIconFoto {
+  margin-top: 240px;
+}
+.contetIconLupa {
+  margin-top: 180px;
+  text-align: right;
+}
+.iconMasCarpetas {
+  position: absolute;
+  font-size: 65px;
+  top: 47px;
+  left: 46px;
+  color: #ff9800;
+}
+.iconMasFotos {
+  position: absolute;
+  font-size: 50px;
+  top: 53px;
+  left: 68px;
+  color: #ff9800;
+}
 .add {
-  border: 3px solid;
+  overflow: hidden;
+}
+.add .cabecera {
+  border-bottom: 3px solid;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+.add md-content.md-default-theme,
+.add md-content {
+  background-color: #ff9800 !important;
+  color: #607d8b;
+  border: 3px solid #607d8b;
 }
 .search {
-  border: 3px solid;
-  margin-left: 5%;
+  overflow: hidden;
 }
-.contenedorIcons {
-  border-right: 3px solid;
-  padding: 7px;
+.search .cabecera {
+  border-bottom: 3px solid;
+  font-size: 20px;
+  font-weight: bold;
   text-align: center;
 }
-.pseudoBoton {
-  line-height: 50px;
+.search md-content.md-default-theme,
+.search md-content {
+  background-color: #ff9800 !important;
+  color: #607d8b;
+  border: 3px solid #607d8b;
+  height: 500px;
+}
+.contPrinc md-content.md-default-theme,
+.contPrinc md-content {
+  background-color: #ff9800 !important;
+  color: #607d8b;
   text-align: center;
 }
-.estilosFormularioAdd {
-  border: 3px solid;
+.contPrinc .fuentePrinc {
+  font-size: 160px;
+  font: bold;
+  font-family: serif;
+  font-style: oblique;
+  text-shadow: 2px 2px #ff0000;
+  opacity: 0.5;
+}
+.contPrinc .fuentePrinc1 {
+  font-size: 200px;
+  font: bold;
+  font-family: serif;
+  font-style: oblique;
+  text-shadow: 2px 2px #ff0000;
+  opacity: 0.5;
+}
+.mgTop100 {
+  margin-top: 100px;
+}
+.mgTop70 {
+  margin-top: 70px;
+}
+.iconoCarpetaSearch {
+  font-size: 100px !important;
+  color: #607d8b;
+  height: 100px;
 }
 .estilosFormularioSearch {
   border: 3px solid;
   margin-left: 5%;
-}
-.estilosBuscador {
-  border: 3px solid;
-}
-.contenedorBuscador {
-  width: 100%;
-  background-color: #ff9800;
-  color: #607d8b;
 }
 .subContBusq {
   clear: both;
@@ -2993,8 +3058,9 @@ md-checkbox {
   left: 47px;
 }
 .contenedorListaFotos {
-  margin: 5px 0 0 10px;
+  margin: 5px 0 0 15px;
   font-size: 14px;
+  opacity: 0.7;
 }
 .contenedorListaFotos i {
   font-size: 20px !important;
@@ -3007,8 +3073,14 @@ md-checkbox {
 .contenedorFoto img {
   height: 100%;
 }
-.iconoCarpetaCarrusel {
-  font-size: 100px !important;
-  color: #607d8b;
-  height: 100px;
+.contenedorResultados {
+  margin-top: 20px;
+  height: 297px;
+  overflow: auto;
+}
+.mensaje {
+  padding-top: 10px;
+  border: 2px solid green;
+  color: green;
+  background-color: rgba(20, 178, 120, 0.3);
 }
