@@ -3078,9 +3078,14 @@ md-checkbox {
   height: 297px;
   overflow: auto;
 }
-.mensaje {
-  padding-top: 10px;
-  border: 2px solid green;
+info-user-invalidMsg {
+  background-color: rgba(255, 32, 32, 0.15);
+  color: #ec0000;
+}
+.info-user-validMsg {
+  background-color: rgba(0, 128, 0, 0.15);
   color: green;
-  background-color: rgba(20, 178, 120, 0.3);
+}
+.info-user-empty {
+  margin-top: 70px;
 }

@@ -71,7 +71,10 @@ angular.module('myEasyOrganicer')
         var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
 $scope.textoMensaje='La Carpeta se ha guardado correctamte';
         $scope.agregarCarpetaOK= function(){
-
+            $scope.mensaje= {
+                texto: 'El mensaje se ha enviado correctamente',
+                classMsg: true
+            };
 
             // setTimeout(function() {
                 $scope.mensaje=true;

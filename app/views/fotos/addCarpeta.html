@@ -16,12 +16,12 @@
                 </md-input-container>
             </div>
             <div layout="row">
-                <div flex="70" class="mensaje" ng-if="mensaje">
+                <!-- <div flex="70" class="mensaje" ng-if="mensaje">
                     <span>{{textoMensaje}}</span>
-                </div>
-                    <div flex="30">
-                        {{mensaje}}
-                <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir carpeta</md-button>
+                </div> -->
+                <div flex="70" mensajes-confirm result="message.text" classname="message.classMsg" ></div>
+                <div flex="30">
+                    <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir carpeta</md-button>
                 </div>
             </div>
 
