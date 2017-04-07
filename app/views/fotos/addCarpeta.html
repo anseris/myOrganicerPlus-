@@ -19,7 +19,11 @@
                 <!-- <div flex="70" class="mensaje" ng-if="mensaje">
                     <span>{{textoMensaje}}</span>
                 </div> -->
-                <div flex="70" mensajes-confirm result="message.text" classname="message.classMsg" ></div>
+                <div  flex="70" ng-if="mensaje.show">
+                    <md-whiteframe flex="100" class=" block-auto" ng-class="{'info-user-validMsg' : mensaje.classname, 'info-user-invalidMsg' : !mensaje.classname}" layout margin layout-align="center center">
+                        <p>{{mensaje.texto}}</p>
+                    </md-whiteframe>
+                </div>
                 <div flex="30">
                     <md-button class="md-raised md-primary btModal" ng-click="agregarCarpeta()">Añadir carpeta</md-button>
                 </div>

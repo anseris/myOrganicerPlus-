@@ -8,7 +8,7 @@
  * Controller of the pruebaApp
  */
 angular.module('myEasyOrganicer')
-  .controller('fotosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', 'Lightbox', function ($scope, $mdDialog, fotosService, $filter, $firebase,Lightbox) {
+  .controller('fotosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', 'Lightbox','$timeout', function ($scope, $mdDialog, fotosService, $filter, $firebase,Lightbox, $timeout) {
 
     $scope.formatoIcons =true;
     $scope.formatoLista =false;
@@ -71,13 +71,25 @@ angular.module('myEasyOrganicer')
         var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
 $scope.textoMensaje='La Carpeta se ha guardado correctamte';
         $scope.agregarCarpetaOK= function(){
-            $scope.mensaje= {
-                texto: 'El mensaje se ha enviado correctamente',
-                classMsg: true
-            };
+            $timeout(function(){
+                $scope.mensaje= {
+                    show:true,
+                    texto: 'El mensaje se ha enviado correctamente',
+                    classMsg: false
+                };
+            },1000);
+            // $timeout(function(){
+            //     $scope.mensaje= {
+            //         show:false,
+            //         texto: 'El mensaje se ha enviado correctamente',
+            //         classMsg: true
+            //     };
+            // },6000);
+
+
 
             // setTimeout(function() {
-                $scope.mensaje=true;
+                // $scope.mensaje=true;
                 console.log('jjklejdkkljkldk', $scope.mensaje)
             //
             // }, 5000)
