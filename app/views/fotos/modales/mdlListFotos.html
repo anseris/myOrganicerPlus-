@@ -10,6 +10,11 @@
     </md-toolbar>
 
     <md-dialog-content layout-padding>
+        <div layout="row" layout-align="center center" class="main-block-loading" ng-if="loading">
+            <div flex="5">
+               <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+           </div>
+        </div>
         <div class="subContBusq">
             <div flex="100" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="foto in carpetas.archivos">
                 <div flex="100">
@@ -27,11 +32,19 @@
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
-        <div flex="50">
+
+        <div flex="50" class="divMensaje"  ng-if="mensaje.show">
+            <md-whiteframe flex="100" class=" block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
+                <p>{{mensaje.texto}}</p>
+            </md-whiteframe>
+        </div>
+        <div flex="30">
             <md-checkbox class="md-primary" ng-model="checkVariasFotos"></md-checkbox>
             <span>Eliminar varias fotos</span>
         </div>
-        <md-button class="md-raised md-primary btModal" ng-disabled="!checkVariasFotos" ng-click="eliminarVariasFotos(carpetas,carpetas.archivos)">Añadir foto</md-button>
+        <div flex="20">
+            <md-button class="md-raised md-primary btModal" ng-disabled="!checkVariasFotos" ng-click="eliminarVariasFotos(carpetas,carpetas.archivos)">Eliminar foto</md-button>
+        </div>
     </md-dialog-actions>
 
 </md-dialog>

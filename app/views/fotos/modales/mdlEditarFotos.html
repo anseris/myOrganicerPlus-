@@ -1,0 +1,57 @@
+<md-dialog flex="50" aria-label="">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Editar la carpeta "{{carpeta.titulo}}"</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <i class="fa fa-times-circle font25" aria-hidden="true"></i>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <form name="editFotosForm">
+        <div layout="row" layout-align="center center" class="main-block-loading" ng-if="loading">
+            <div flex="5">
+               <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+           </div>
+        </div>
+        <md-dialog-content layout-padding  >
+            <md-content class="md-padding">
+                <!-- <md-dialog-content layout-padding> -->
+                <md-input-container class="md-block">
+                    <label class="labelInput">Nombre de la foto</label>
+                    <input ng-model="foto.tituloFoto" required>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label class="labelInput">Elige carpeta de ubicacion</label>
+                    <md-select name="carpetasMdl" ng-model="carpetasMdl" required>
+                        <md-option
+                        ng-repeat="carpetaMdl in carpetas"
+                        ng-value="carpetaMdl.$id">
+                        {{carpetaMdl.titulo}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <div flex="100" class="mgTop10" layout="row">
+                    <div flex="40" class="">
+                        <md-input-container>
+                            <label>Enter date</label>
+                            <md-datepicker ng-model="newFechaFoto" required></md-datepicker>
+                        </md-input-container>
+                    </div>
+                </div>
+            </md-content>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <div  flex="65" class="divMensaje"  ng-if="mensaje.show">
+                <md-whiteframe flex="100" class=" block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
+                    <p>{{mensaje.texto}}</p>
+                </md-whiteframe>
+            </div>
+            <div flex="25">
+                <md-button class="md-raised md-primary btModal" ng-disabled="editFotosForm.$invalid" ng-click="actualizarFoto(editFotosForm)">Añadir carpeta</md-button>
+            </div>
+        </md-dialog-actions>
+    </form>
+
+</md-dialog>

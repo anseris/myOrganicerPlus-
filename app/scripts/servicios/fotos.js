@@ -28,25 +28,32 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
     };
 
 
-    var addCarpeta = function(datosAdded, callback) {
+    var addCarpeta = function(datosAdded, callback, callbackError, form) {
         ref.push().set(datosAdded, function(error){
             if(error){
-                console.log('error')
+                callbackError(form)
             }
             else{
-                callback();
+                callback(form);
             }
         });
     };
 
 
 
-    var actualizarCarpeta = function(datosAdded, idCarpeta) {
+    var actualizarCarpeta = function(datosAdded, idCarpeta, callback, callbackError, form) {
         var refActCarp = db.ref("fotos/carpetas/" + idCarpeta);
-        refActCarp.update(datosAdded);
+        refActCarp.update(datosAdded, function(error){
+            if(error){
+                callbackError(form)
+            }
+            else{
+                callback(form);
+            }
+        });
     };
 
-    var addFoto = function(datosAdded) {
+    var addFoto = function(datosAdded, callback, callbackError, form) {
         console.log('datosAdded', datosAdded)
 
         var file= datosAdded.file;
@@ -56,7 +63,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
         storage.child(file.name).put(file).then(function(){
             storage.child(file.name).getDownloadURL().then(function(url){
-                refFoto.push({
+                refFoto.push().set({
                     idFoto:datosAdded.idFoto,
                     idCarpeta: datosAdded.idCarpeta,
                     fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
@@ -64,12 +71,19 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                     tituloFoto:datosAdded.tituloFoto,
                     img:url,
                     chequeado:datosAdded.chequeado
+                }, function(error){
+                    if(error){
+                        callbackError(form);
+                    }
+                    else{
+                        callback(form);
+                    }
                 });
             });
         });
     };
 
-    var actualizarFoto = function(datosAdded, ubicCarpeta, idCarpetaOrig) {
+    var actualizarFoto = function(datosAdded, ubicCarpeta, idCarpetaOrig, callback, callbackError, form) {
         console.log('datosAdded', datosAdded)
         console.log('ubicCarpeta', ubicCarpeta)
 
@@ -78,7 +92,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         var refActFoto = db.ref("fotos/carpetas/" + idFotoA + "/archivos/");
         if(ubicCarpeta==='otraCarpeta'){
             console.log('ubicCarpeta otra', ubicCarpeta)
-            refActFoto.push({
+            refActFoto.push().set({
                 idFoto:datosAdded.idFoto,
                 idCarpeta: datosAdded.idCarpeta,
                 fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
@@ -86,8 +100,15 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                 tituloFoto:datosAdded.tituloFoto,
                 img:datosAdded.img,
                 chequeado:datosAdded.chequeado
+            }, function(error){
+                if(error){
+                    callbackError(form);
+                }
+                else{
+                    callback(form);
+                }
             });
-            deleteFotos(idCarpetaOrig, datosAdded.idFoto);
+            deleteFotos(idCarpetaOrig, datosAdded.idFoto, '', '');
 
         }
         var archivos={};
@@ -100,11 +121,6 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                 if(indice.idFoto===datosAdded.idFoto){
                     var idFotoUni=valor;
                     var refActDefFoto = db.ref("fotos/carpetas/" + idFotoA + "/archivos/"+ idFotoUni);
-                    // var deleteActuFoto= funcion(){
-                    //     var refDelDefFoto = db.ref("fotos/carpetas/" + idCarpetaOrig + "/archivos/"+ idFotoUni);
-                    //     console.log('ubicCarpeta misma', ubicCarpeta)
-                    //     refDelDefFoto.remove();
-                    // }
                     if(ubicCarpeta==='mismaCarpeta'){
                         console.log('ubicCarpeta misma', ubicCarpeta)
                         refActDefFoto.update({
@@ -115,6 +131,13 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                             tituloFoto:datosAdded.tituloFoto,
                             img:datosAdded.img,
                             chequeado:datosAdded.chequeado
+                        }, function(error){
+                            if(error){
+                                callbackError(form);
+                            }
+                            else{
+                                callback(form);
+                            }
                         });
                     }
 
@@ -127,13 +150,20 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
     };
 
-    var deleteCarpetas = function(idCarpeta){
+    var deleteCarpetas = function(idCarpeta, callback, callbackError){
         var deleteCarpeta = db.ref("fotos/carpetas/" + idCarpeta);
-        deleteCarpeta.remove();
+        deleteCarpeta.remove(function(error){
+            if(error){
+                callbackError()
+            }
+            else{
+                callback();
+            }
+        });
 
     };
 
-    var deleteFotos = function(idCarpeta, idFoto){
+    var deleteFotos = function(idCarpeta, idFoto, callback, callbackError){
         var refArchivos = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/");
         var archivos={};
         refArchivos.on('value',function(datos){
@@ -143,13 +173,20 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                 if(indice.idFoto===idFoto){
                     var idFotoUni=valor;
                     var deleteFoto = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/"+ idFotoUni);
-                    deleteFoto.remove();
+                    deleteFoto.remove(function(error){
+                        if(error){
+                            callbackError()
+                        }
+                        else{
+                            callback();
+                        }
+                    });
                 }
             });
         });
     }
 
-    var deleteVariasFotos = function(idCarpeta, fotos){
+    var deleteVariasFotos = function(idCarpeta, fotos, callback, callbackError){
         var refArchivos = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/");
         for (var a in fotos) {
             if (fotos[a].chequeado===true) {
@@ -163,7 +200,14 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                         if(indice.idFoto===idFoto){
                             var idFotoUni=valor;
                             var deleteFoto = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/"+ idFotoUni);
-                            deleteFoto.remove();
+                            deleteFoto.remove(function(error){
+                                if(error){
+                                    callbackError()
+                                }
+                                else{
+                                    callback();
+                                }
+                            });
                         }
                     });
                 });
