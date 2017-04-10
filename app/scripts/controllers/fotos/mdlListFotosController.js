@@ -1,7 +1,7 @@
 angular.module('myEasyOrganicer')
 .controller('mdlListFotosCtrl', ['$scope', '$mdDialog',  'carpeta', 'Lightbox', 'fotosService',  '$timeout', function($scope, $mdDialog, carpeta, Lightbox, fotosService,  $timeout) {
     console.log('carpeta', carpeta)
-      // Recuperar datos
+    // Recuperar datos
     $scope.carpetas= carpeta;
     $scope.fotos= [];
     $scope.verFoto = function (index) {
@@ -98,6 +98,3 @@ angular.module('myEasyOrganicer')
     };
 
 }]);
-
-
- 

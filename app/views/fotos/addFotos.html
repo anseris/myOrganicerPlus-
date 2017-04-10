@@ -13,8 +13,8 @@
 
 
                 <md-input-container class="md-block">
-                    <label class="labelInput">Nombre de la foto</label>
-                    <input ng-model="tituloFoto" required>
+                    <label class="labelInput">Nombre de la foto (opcional)</label>
+                    <input ng-model="tituloFoto">
                 </md-input-container>
 
                 <md-input-container class="md-block">
@@ -28,16 +28,16 @@
                     </md-select>
                 </md-input-container>
                 <div flex="100" class="mgTop10" layout="row">
-                    <div flex="60" class="mgTop10">
+                    <div flex="50" class="mgTop10">
                         <input class="ng-hide" id="file" ng-model="document" type="file" name="archivoFoto" valid-file>
                         <label for="file" class="md-button md-fab md-mini md-primary md-hue-2"><i class="fa fa-upload" aria-hidden="true"></i></label>
                         <span class="fotoPend" ng-show="fotosForm.archivoFoto.$error.validFile || document===undefined">Agrega la fotografia</span>
                         <span class="fotoAgreg" ng-show="!fotosForm.archivoFoto.$error.validFile && document!==undefined">Fotografia agregada</span>
                     </div>
-                    <div flex="40" class="">
+                    <div flex="50" class="contFecha">
                         <md-input-container>
-                            <label>Fecha foto</label>
-                            <md-datepicker ng-model="fechaFoto" required></md-datepicker>
+                            <label>Fecha foto (opcional)</label>
+                            <md-datepicker ng-model="fechaFoto"></md-datepicker>
                         </md-input-container>
                     </div>
                 </div>

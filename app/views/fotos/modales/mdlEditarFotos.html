@@ -1,7 +1,7 @@
 <md-dialog flex="50" aria-label="">
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2>Editar la carpeta "{{carpeta.titulo}}"</h2>
+            <h2>Editar la foto "{{foto.tituloFoto}}"</h2>
             <span flex></span>
             <md-button class="md-icon-button" ng-click="cancel()">
                 <i class="fa fa-times-circle font25" aria-hidden="true"></i>
@@ -15,29 +15,33 @@
            </div>
         </div>
         <md-dialog-content layout-padding  >
-            <md-content class="md-padding">
-                <!-- <md-dialog-content layout-padding> -->
-                <md-input-container class="md-block">
-                    <label class="labelInput">Nombre de la foto</label>
-                    <input ng-model="foto.tituloFoto" required>
-                </md-input-container>
+            <md-content class="md-padding" layout="row">
+                <div flex="40" >
+                    <img class="imgEditarFoto" src="{{foto.img}}" alt="">
+                </div>
+                <div flex="60">
+                    <md-input-container class="md-block">
+                        <label class="labelInput">Nombre de la foto</label>
+                        <input ng-model="foto.tituloFoto" required>
+                    </md-input-container>
 
-                <md-input-container class="md-block">
-                    <label class="labelInput">Elige carpeta de ubicacion</label>
-                    <md-select name="carpetasMdl" ng-model="carpetasMdl" required>
-                        <md-option
-                        ng-repeat="carpetaMdl in carpetas"
-                        ng-value="carpetaMdl.$id">
-                        {{carpetaMdl.titulo}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
-                <div flex="100" class="mgTop10" layout="row">
-                    <div flex="40" class="">
-                        <md-input-container>
-                            <label>Enter date</label>
-                            <md-datepicker ng-model="newFechaFoto" required></md-datepicker>
-                        </md-input-container>
+                    <md-input-container class="md-block">
+                        <label class="labelInput">Elige carpeta de ubicacion</label>
+                        <md-select name="carpetasMdl" ng-model="carpetasMdl" required>
+                            <md-option
+                            ng-repeat="carpetaMdl in carpetas"
+                            ng-value="carpetaMdl.$id">
+                            {{carpetaMdl.titulo}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                    <div flex="100" class="mgTop10" layout="row">
+                        <div flex="70" class="contFechaEdit">
+                            <md-input-container>
+                                <label>Fecha foto (opcional) </label>
+                                <md-datepicker ng-model="newFechaFoto"></md-datepicker>
+                            </md-input-container>
+                        </div>
                     </div>
                 </div>
             </md-content>

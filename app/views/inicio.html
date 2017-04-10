@@ -1,5 +1,21 @@
 <md-content class="height100 bgInicio" flex layout-padding>
-    <p>
-        Duo at aliquid mnesarchum, nec ne impetus hendrerit. Ius id aeterno debitis atomorum, et sed feugait voluptua, brute tibique no vix. Eos modo esse ex, ei omittam imperdiet pro. Vel assum albucius incorrupte no. Vim viris prompta repudiare ne, vel ut viderer scripserit, dicant appetere argumentum mel ea. Eripuit feugait tincidunt pri ne, cu facilisi molestiae usu.
-    </p>
+
+            <span >
+                <a href="#tab2">
+                Fotos</a></span>
+                <div class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
+                    <div class="height100" id="tab1">
+                        <div>Inicio</div>
+
+                    </div>
+                    <div class="height100" id="tab2" ng-disabled="data.secondLocked">
+                        <div ng-click="next">Fotos</div>
+                    </div>
+                    <div class="height100" id="tab3">
+                        <div>Item Three</div>
+                    </div>
+
+
+
+                </div>
 </md-content>

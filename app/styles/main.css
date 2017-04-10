@@ -2932,6 +2932,18 @@ md-checkbox {
 .tabModal md-content {
   background-color: #ff9800 !important;
 }
+.contFecha md-input-container {
+  width: 100%;
+}
+.contFecha ._md-datepicker-floating-label > md-datepicker .md-datepicker-input-container {
+  width: 60%;
+}
+.contFechaEdit md-input-container {
+  width: 100%;
+}
+.contFechaEdit ._md-datepicker-floating-label > md-datepicker .md-datepicker-input-container {
+  width: 60%;
+}
 /*Paginas*/
 .bgInicio {
   background-color: #5d4037;
@@ -3111,4 +3123,7 @@ md-checkbox {
 .fotoAgreg {
   color: green !important;
   font-weight: bold;
+}
+.imgEditarFoto {
+  width: 90%;
 }
