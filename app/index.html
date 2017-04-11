@@ -19,16 +19,11 @@
   </head>
   <body ng-app="myEasyOrganicer">
 
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
-    <!-- Add your site or application content here -->
+    <main class="height100">
+        <ng-include src="'views/contenedorPrincipal.html'"></ng-include>
+    </main>
 
 
-    <div class="container">
-    <div class="height100" ng-view=""></div>
-    </div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -59,7 +54,6 @@
     <script src="bower_components/angularfire/dist/angularfire.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
-    
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -79,6 +73,8 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/menu/menuController.js"></script>
+        <script src="scripts/controllers/inicio/inicioController.js"></script>
         <script src="scripts/controllers/fotos/fotosController.js"></script>
         <script src="scripts/controllers/fotos/mdlEditCarpetasController.js"></script>
         <script src="scripts/controllers/fotos/mdlEditFotosController.js"></script>
@@ -87,7 +83,8 @@
         <!-- librerias externas -->
         <!-- fin librerias externas -->
         <!-- Servicios -->
-        <script src="scripts/servicios/fotos.js"></script>
+        <script src="scripts/servicios/menuSvc.js"></script>
+        <script src="scripts/servicios/fotosSvc.js"></script>
         <!-- Final de servicios -->
         <!-- directivas -->
         <script src="scripts/directivas/validFile.js"></script>

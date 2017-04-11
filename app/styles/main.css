@@ -2949,6 +2949,68 @@ md-checkbox {
   background-color: #5d4037;
   color: #ffffff;
 }
+.pointer {
+  cursor: pointer;
+}
+.contenedorInicio {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+.contenedorPaginas {
+  height: 260px;
+}
+.bgSectionFotos {
+  background-color: #ff9800;
+  opacity: 0.5;
+}
+.bgSectionFotos:hover {
+  opacity: 1;
+}
+.bgSectionVideos {
+  background-color: aqua;
+  opacity: 0.5;
+}
+.bgSectionVideos:hover {
+  opacity: 1;
+}
+.bgSectionSeries {
+  background-color: green;
+  opacity: 0.5;
+}
+.bgSectionSeries:hover {
+  opacity: 1;
+}
+.bgSectionPeliculas {
+  background-color: coral;
+  opacity: 0.5;
+}
+.bgSectionPeliculas:hover {
+  opacity: 1;
+}
+.bgSectionArchivos {
+  background-color: white;
+  opacity: 0.5;
+}
+.bgSectionArchivos:hover {
+  opacity: 1;
+}
+.contSeccion {
+  float: left;
+  width: 25%;
+  margin-top: 20px;
+}
+.iconosInicio {
+  font-size: 180px;
+  padding: 25px 40px 10px;
+}
+.colorMarron {
+  color: #5d4037;
+}
+.nombreSeccionClass {
+  text-align: center;
+  font-size: 30px;
+}
 .bgFotos {
   background-color: #ff9800;
   color: #ffffff;
@@ -3015,7 +3077,7 @@ md-checkbox {
   background-color: #ff9800 !important;
   color: #607d8b;
   border: 3px solid #607d8b;
-  height: 500px;
+  height: 550px;
 }
 .contPrinc md-content.md-default-theme,
 .contPrinc md-content {
@@ -3048,7 +3110,8 @@ md-checkbox {
 .iconoCarpetaSearch {
   font-size: 100px !important;
   color: #607d8b;
-  height: 100px;
+  height: 90px;
+  padding: 0!important;
 }
 .estilosFormularioSearch {
   border: 3px solid;
@@ -3058,6 +3121,9 @@ md-checkbox {
   clear: both;
   float: left;
   width: 100%;
+}
+.subContBusq span {
+  padding: 0!important;
 }
 .contCarpeta {
   float: left;
@@ -3098,7 +3164,7 @@ md-checkbox {
 }
 .contenedorResultados {
   margin-top: 20px;
-  height: 297px;
+  height: 330px;
   overflow: auto;
 }
 .info-user-invalidMsg {
@@ -3126,4 +3192,8 @@ md-checkbox {
 }
 .imgEditarFoto {
   width: 90%;
+}
+.eliminarVarias {
+  font-size: 30px !important;
+  margin-left: 25px;
 }

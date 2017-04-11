@@ -219,6 +219,30 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
     }
 
+    var deleteVariasCarpetas = function(carpetas, callback, callbackError){
+        // var refArchivos = db.ref("carpetas/carpetas/");
+        for (var a in carpetas) {
+            if (carpetas[a].chequeado===true) {
+                var idCarpeta=carpetas[a].$id;
+                // console.log('idFoto',idFoto);
+
+
+                    var deleteCarpeta = db.ref("fotos/carpetas/" + idCarpeta);
+                    deleteCarpeta.remove(function(error){
+                        if(error){
+                            callbackError()
+                        }
+                        else{
+                            callback();
+                        }
+                    });
+                }
+
+
+            }
+
+    }
+
 
 
     return {
@@ -228,6 +252,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         deleteCarpetas:deleteCarpetas,
         deleteFotos:deleteFotos,
         deleteVariasFotos:deleteVariasFotos,
+        deleteVariasCarpetas:deleteVariasCarpetas,
         actualizarCarpeta:actualizarCarpeta,
         actualizarFoto:actualizarFoto
 

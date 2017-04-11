@@ -40,12 +40,6 @@ angular.module('myEasyOrganicer')
 
 
 
-    // var database = firebase.database().ref("fotos/carpetas");
-    var storage;
-    storage = firebase.storage().ref("images");
-
-
-
 
 
 
@@ -59,7 +53,6 @@ angular.module('myEasyOrganicer')
         var fotos=($scope.carpetasFotos).length;
         $scope.loading=false;
         console.log('fotos', fotos);
-        //   $scope.loading= false;
     };
 
 
@@ -137,7 +130,8 @@ angular.module('myEasyOrganicer')
             idCarpeta: id,
             titulo:$scope.tituloCarpeta,
             fechaActual:fechaActual,
-            fechaCarpeta:fechaCarpeta
+            fechaCarpeta:fechaCarpeta,
+            chequeado:false
         };
         $scope.loading=true;
 
@@ -293,6 +287,71 @@ angular.module('myEasyOrganicer')
         var claveCarpeta =carpeta.$id;
         $scope.loading=true;
         fotosService.deleteCarpetas(claveCarpeta, eliminarCarpetaOK, eliminarCarpetaKO);
+    }
+
+    var eliminarVariasCarpetasOK= function(){
+        $scope.mensaje= {
+            show:true,
+            texto: 'Se han eliminado las carpetas seleccionadas',
+            classMsg: true
+        };
+        $scope.loading=false;
+        $scope.formatoIcons=true;
+        $scope.formatoLista=false;
+        // $scope.carpeta.expanded=true;
+        $scope.$apply();
+        $timeout(function(){
+            $scope.mensaje= {
+                show:false
+            };
+            $scope.$apply();
+        },4000);
+    }
+
+    var eliminarVariasCarpetasKO= function(){
+        $scope.mensaje= {
+            show:true,
+            texto: 'ERROR al eliminar las carpetas, vuelva a intentar',
+            classMsg: false
+        };
+        $scope.loading=false;
+        // $scope.carpeta.expanded=true;
+        $scope.$apply();
+        $timeout(function(){
+            $scope.mensaje= {
+                show:false
+            };
+            $scope.$apply();
+        },4000);
+    }
+
+    $scope.eliminarVariasCarpetas= function(carpeta){
+
+        for (var a in carpeta) {
+            if (carpeta[a].chequeado===true) {
+                var carpeta =carpeta;
+                $scope.loading=true;
+                fotosService.deleteVariasCarpetas(carpeta, eliminarVariasCarpetasOK, eliminarVariasCarpetasKO);
+
+            }
+            else{
+                $scope.formatoIcons=true;
+                $scope.formatoLista=false;
+                $scope.mensaje= {
+                    show:true,
+                    texto: 'Tiene que chequear alguna foto para poder eliminar',
+                    classMsg: false
+                };
+
+                $timeout(function(){
+                    $scope.mensaje= {
+                        show:false
+                    };
+                },4000);
+            }
+
+        }
+
     }
 
     var eliminarFotoOK= function(){

@@ -1,0 +1,17 @@
+<div ng-controller="menuCtrl" ng-cloak>
+  <md-content>
+    <md-nav-bar
+      md-selected-nav-item="currentNavItem.getEstadoMenu()"
+      nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="goTo('inicio')" name="inicio">
+        Inicio
+      </md-nav-item>
+      <md-nav-item md-nav-click="goTo('fotos')" name="fotos">
+        Fotos
+      </md-nav-item>
+      <md-nav-item md-nav-click="goTo('videos')" name="videos">
+        Videos
+      </md-nav-item>
+    </md-nav-bar>
+  </md-content>
+</div>

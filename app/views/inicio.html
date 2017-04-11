@@ -1,21 +1,11 @@
 <md-content class="height100 bgInicio" flex layout-padding>
+    <div class="contenedorInicio">
+        <div flex="25" class="contSeccion relative" ng-repeat="seccion in secciones">
+            <div flex="80" class="contenedorPaginas bkAuto {{seccion.bgSection}} pointer" ng-click="goTo(seccion.secion)">
+                <i class="fa {{seccion.icono}} iconosInicio {{seccion.colorIcono}}" aria-hidden="true"></i>
+                <div class="nombreSeccionClass {{seccion.colorIcono}}" flex="100">{{seccion.nombreSeccion}}</div>
+            </div>
+        </div>
+    </div>
 
-            <span >
-                <a href="#tab2">
-                Fotos</a></span>
-                <div class="md-accent" md-selected="data.selectedIndex" md-align-tabs="{{data.bottom ? 'bottom' : 'top'}}">
-                    <div class="height100" id="tab1">
-                        <div>Inicio</div>
-
-                    </div>
-                    <div class="height100" id="tab2" ng-disabled="data.secondLocked">
-                        <div ng-click="next">Fotos</div>
-                    </div>
-                    <div class="height100" id="tab3">
-                        <div>Item Three</div>
-                    </div>
-
-
-
-                </div>
 </md-content>
