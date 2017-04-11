@@ -1,0 +1,29 @@
+<md-content class="height100 bgVideos" layout-padding ng-controller="fotosCtrl">
+    <div flex="95" class="bkAuto" layout="row">
+        <div flex="20">
+            <div class="relative" ng-click="expandedCarpeta()">
+                <i class="fa fa-folder iconoCarpeta" aria-hidden="true"></i>
+                <i class="fa fa-plus iconMasCarpetas" aria-hidden="true"></i>
+
+            </div>
+            <div class="contetIconFoto relative" ng-click="expandedFoto()">
+                <i class="fa fa-picture-o iconoFotoGrande" aria-hidden="true"></i>
+                <i class="fa fa-plus iconMasFotos" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div flex="60" >
+            <ng-include src="'views/fotos/principal.html'"  ng-hide="addCarpetaExpanded || addFotoExpanded || searchExpanded"></ng-include>
+            <ng-include src="'views/fotos/addCarpeta.html'" ng-show="addCarpetaExpanded"></ng-include>
+            <ng-include src="'views/fotos/addFotos.html'"  ng-show="addFotoExpanded"></ng-include>
+            <ng-include src="'views/fotos/searchFotos.html'"  ng-show="searchExpanded"></ng-include>
+        </div>
+        <div flex="20">
+            <div class="contetIconLupa" ng-click="expandedSearch()">
+                <i class="fa fa-search iconoFotoGrande" aria-hidden="true"></i>
+            </div>
+        </div>
+
+    </div>
+
+
+</md-content>

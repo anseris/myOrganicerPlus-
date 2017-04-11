@@ -33,6 +33,11 @@ angular
         controller: 'fotosCtrl',
         controllerAs: 'fotos'
       })
+      .when('/videos', {
+        templateUrl:  'views/videos/videos.html',
+        controller: 'videosCtrl',
+        controllerAs: 'fotos'
+      })
       .otherwise({
         redirectTo: '/'
       });
