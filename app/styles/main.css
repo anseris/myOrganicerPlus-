@@ -1,5 +1,82 @@
 /*Reset*/
 /*Colores*/
+.fuenteBlanca {
+  color: #ffffff;
+}
+.fuenteMarron {
+  color: #5d4037;
+}
+.fuenteNaranja {
+  color: #ff9800;
+}
+.fuenteBlanca {
+  color: #ffffff;
+}
+.fuenteAzulOscuro {
+  color: #607d8b;
+}
+.fuenteAqua {
+  color: aqua;
+}
+.fuenteCoral {
+  color: coral;
+}
+.bgBlanca {
+  background-color: #ffffff;
+}
+.bgMarron {
+  background-color: #5d4037;
+}
+.bgNaranja {
+  background-color: #ff9800;
+}
+.bgBlanca {
+  background-color: #ffffff;
+}
+.bgAzulOscuro {
+  background-color: #607d8b;
+}
+.bgAqua {
+  background-color: aqua;
+}
+.bgCoral {
+  background-color: coral;
+}
+.bgSectionFotos {
+  background-color: #ff9800;
+  opacity: 0.5;
+}
+.bgSectionFotos:hover {
+  opacity: 1;
+}
+.bgSectionVideos {
+  background-color: aqua;
+  opacity: 0.5;
+}
+.bgSectionVideos:hover {
+  opacity: 1;
+}
+.bgSectionSeries {
+  background-color: green;
+  opacity: 0.5;
+}
+.bgSectionSeries:hover {
+  opacity: 1;
+}
+.bgSectionPeliculas {
+  background-color: coral;
+  opacity: 0.5;
+}
+.bgSectionPeliculas:hover {
+  opacity: 1;
+}
+.bgSectionArchivos {
+  background-color: white;
+  opacity: 0.5;
+}
+.bgSectionArchivos:hover {
+  opacity: 1;
+}
 /*bases*/
 .container {
   width: 100%;
@@ -2960,41 +3037,6 @@ md-checkbox {
 .contenedorPaginas {
   height: 260px;
 }
-.bgSectionFotos {
-  background-color: #ff9800;
-  opacity: 0.5;
-}
-.bgSectionFotos:hover {
-  opacity: 1;
-}
-.bgSectionVideos {
-  background-color: aqua;
-  opacity: 0.5;
-}
-.bgSectionVideos:hover {
-  opacity: 1;
-}
-.bgSectionSeries {
-  background-color: green;
-  opacity: 0.5;
-}
-.bgSectionSeries:hover {
-  opacity: 1;
-}
-.bgSectionPeliculas {
-  background-color: coral;
-  opacity: 0.5;
-}
-.bgSectionPeliculas:hover {
-  opacity: 1;
-}
-.bgSectionArchivos {
-  background-color: white;
-  opacity: 0.5;
-}
-.bgSectionArchivos:hover {
-  opacity: 1;
-}
 .contSeccion {
   float: left;
   width: 25%;
@@ -3039,14 +3081,12 @@ md-checkbox {
   font-size: 65px;
   top: 47px;
   left: 46px;
-  color: #ff9800;
 }
 .iconMasFotos {
   position: absolute;
   font-size: 50px;
   top: 53px;
   left: 68px;
-  color: #ff9800;
 }
 .add {
   overflow: hidden;
@@ -3059,7 +3099,6 @@ md-checkbox {
 }
 .add md-content.md-default-theme,
 .add md-content {
-  background-color: #ff9800 !important;
   color: #607d8b;
   border: 3px solid #607d8b;
 }
@@ -3074,14 +3113,12 @@ md-checkbox {
 }
 .search md-content.md-default-theme,
 .search md-content {
-  background-color: #ff9800 !important;
   color: #607d8b;
   border: 3px solid #607d8b;
   height: 550px;
 }
 .contPrinc md-content.md-default-theme,
 .contPrinc md-content {
-  background-color: #ff9800 !important;
   color: #607d8b;
   text-align: center;
 }
@@ -3199,4 +3236,10 @@ md-checkbox {
 }
 .bgVideos {
   background-color: aqua;
+}
+.iconMasVideos {
+  position: absolute;
+  font-size: 50px;
+  top: 55px;
+  left: 23px;
 }

@@ -1,5 +1,5 @@
-<div flex="90" class="search bkAuto " ng-controller="fotosCtrl">
-        <md-content class="md-padding bgNaranja">
+<div flex="90" class="search bkAuto " ng-controller="videosCtrl">
+        <md-content class="md-padding bgAqua">
             <div class="cabecera md-padding" >
                 <span>Buscar Carpetas</span>
             </div>
@@ -11,12 +11,11 @@
             <div  class="md-padding">
                 <md-input-container flex="100" class="md-block">
                     <label>Busca carpeta</label>
-                    <input flex="80" ng-model="buscadorFotos">
+                    <input flex="80" ng-model="buscadorVideos">
                     <span flex="10" ng-click="formatoIconsFunc()"><i class="fa fa-th-large" aria-hidden="true"></i></span>
                     <span flex="10" ng-click="formatoListaFunc()"><i class="fa fa-th-list" aria-hidden="true"></i></span>
-                    <span flex="20" ng-show="formatoIcons"><i class="fa fa-trash eliminarVarias" aria-hidden="true" ng-click="eliminarVariasCarpetas(carpetasFotos)" ></i></span>
+                    <span flex="20" ng-show="formatoIcons"><i class="fa fa-trash eliminarVarias" aria-hidden="true" ng-click="eliminarVariasCarpetas(carpetasVideos)" ></i></span>
                 </md-input-container>
-                {{algunChequeado}}
                 <div  flex="100" class="mgTop10"  ng-if="mensaje.show">
                     <md-whiteframe flex="100" class="info-user-invalidMsg block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
                         <p>{{mensaje.texto}}</p>
@@ -24,13 +23,13 @@
                 </div>
                 <div class="contenedorResultados">
                     <div class="subContBusq" ng-show="formatoIcons">
-                        <div flex="25" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos">
+                        <div flex="25" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="carpeta in carpetasVideos | filter:buscadorVideos">
                             <span>{{carpeta.titulo}}</span><br>
-                            <i class="fa fa-folder-o iconoCarpetaSearch" aria-hidden="true" ng-click="mostarModalFotos(carpeta)"></i>
+                            <i class="fa fa-folder-o iconoCarpetaSearch" aria-hidden="true" ng-click="mostarModalVideos(carpeta)"></i>
                             <div class="numFotos">
                                 <span ng-if="(carpeta.archivos | objectKeysLength) > 0">{{ carpeta.archivos | objectKeysLength }}</span>
                                 <span ng-if="carpeta.archivos===udefined">0</span>
-                                <span>Fotos</span>
+                                <span>Videos</span>
                             </div>
                             <div flex="100"   layout="row">
                                 <div flex="45" class="" ><md-checkbox class="md-primary" ng-model="carpeta.chequeado" ng-click="ckeckChequeados()"></md-checkbox></div>
@@ -41,8 +40,8 @@
 
                         </div>
                     </div>
-                    <div class="formatoLista" ng-show="formatoLista" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos" ng-init="carpeta.expanded=false">
-                        <div layout="row" class="" layout-wrap ng-click="carpeta.expanded=!carpeta.expanded" ng-dblclick="mostarModalFotos(carpeta)">
+                    <div class="formatoLista" ng-show="formatoLista" ng-repeat="carpeta in carpetasVideos | filter:buscadorVideos" ng-init="carpeta.expanded=false">
+                        <div layout="row" class="" layout-wrap ng-click="carpeta.expanded=!carpeta.expanded" ng-dblclick="mostarModalVideos(carpeta)">
                             <i flex="5" class="fa fa-folder " aria-hidden="true" ng-class="{'fa-folder': !carpeta.expanded, 'fa-folder-open': carpeta.expanded}"></i>
                             <div flex="45" >{{ carpeta.titulo }}</div>
                             <div flex="15" ng-if="(carpeta.archivos | objectKeysLength) > 0">{{ carpeta.archivos | objectKeysLength }} Fotos</div>
@@ -59,7 +58,7 @@
                             </div>
                             <div flex="15" >{{ foto.fechaFoto }}</div>
                             <div flex="10" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarFoto(carpeta, foto)"></i></div>
-                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ng-click="editarFoto(carpeta, foto, carpetasFotos)"></i></div>
+                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ng-click="editarFoto(carpeta, foto, carpetasVideos)"></i></div>
                         </div>
                     </div>
                 </div>

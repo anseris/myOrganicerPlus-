@@ -1,0 +1,37 @@
+<div flex="90" class="add mgTop100 bkAuto " ng-controller="videosCtrl">
+
+    <form name="carpetasVideosForm" flex="100">
+        <md-content class="md-padding bgAqua">
+            <div class="cabecera md-padding" >
+                <span>Añadir Carpetas</span>
+            </div>
+            <div layout="row" layout-align="center center" class="main-block-loading" ng-if="loading">
+                <div flex="5">
+                   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+               </div>
+            </div>
+            <div layout-gt-xs="row" class="md-padding">
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Nombre de la carpeta</label>
+                    <input ng-model="tituloCarpeta" required>
+                </md-input-container>
+                <md-input-container>
+                    <label>Fecha carpeta</label>
+                    <md-datepicker ng-model="fechaCarpeta" required></md-datepicker>
+                </md-input-container>
+            </div>
+            <div layout="row">
+                <div flex="25">
+                    <md-button class="md-raised md-primary btModal" ng-disabled="carpetasVideosForm.$invalid" ng-click="agregarCarpetaVid(carpetasVideosForm)">Añadir carpeta</md-button>
+                </div>
+                <div  flex="65" class="divMensaje"  ng-if="mensaje.show">
+                    <md-whiteframe flex="100" class=" block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
+                        <p>{{mensaje.texto}}</p>
+                    </md-whiteframe>
+                </div>
+            </div>
+
+
+        </md-content>
+    </form>
+</div>

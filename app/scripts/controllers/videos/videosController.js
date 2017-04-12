@@ -8,49 +8,47 @@
 * Controller of the pruebaApp
 */
 angular.module('myEasyOrganicer')
-.controller('videosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', 'Lightbox','$timeout', function ($scope, $mdDialog, fotosService, $filter, $firebase,Lightbox, $timeout) {
+.controller('videosCtrl',['$scope', '$mdDialog', 'videosService', '$filter','$firebase', 'Lightbox','$timeout', function ($scope, $mdDialog, videosService, $filter, $firebase,Lightbox, $timeout) {
 
     $scope.formatoIcons =true;
     $scope.formatoLista =false;
     $scope.fotoAgregada =false;
 
+    $scope.formatoIconsFunc = function() {
+        $scope.formatoIcons =true;
+        $scope.formatoLista =false;
+    };
+
+    $scope.formatoListaFunc = function() {
+        $scope.formatoIcons =false;
+        $scope.formatoLista =true;
+    };
+
     $scope.addCarpetaExpanded =false;
-    $scope.addFotoExpanded =false;
+    $scope.addVideoExpanded =false;
     $scope.searchExpanded =false;
-
-    // $scope.mensaje=false;
-
 
     $scope.expandedCarpeta= function(){
         $scope.addCarpetaExpanded =!$scope.addCarpetaExpanded;
-        $scope.addFotoExpanded =false;
+        $scope.addVideoExpanded =false;
         $scope.searchExpanded =false;
     };
 
-    $scope.expandedFoto= function(){
-        $scope.addFotoExpanded =!$scope.addFotoExpanded;
+    $scope.expandedVideo= function(){
+        $scope.addVideoExpanded =!$scope.addVideoExpanded;
         $scope.addCarpetaExpanded =false;
         $scope.searchExpanded =false;
     };
     $scope.expandedSearch= function(){
         $scope.searchExpanded =!$scope.searchExpanded;
         $scope.addCarpetaExpanded =false;
-        $scope.addFotoExpanded =false;
+        $scope.addVideoExpanded =false;
     };
-
-
-
-
-
-
-
-
     // Recuperar datos
-    //   $scope.loading= true;
 
     var datosRecuperados = function(datos) {
-        $scope.carpetasFotos=datos;
-        var fotos=($scope.carpetasFotos).length;
+        $scope.carpetasVideos=datos;
+        var fotos=($scope.carpetasVideos).length;
         $scope.loading=false;
         console.log('fotos', fotos);
     };
@@ -72,14 +70,14 @@ angular.module('myEasyOrganicer')
         },4000);
     };
 
-    fotosService.recuperarCarpetas(datosRecuperados, errorLLamada);
+    videosService.recuperarCarpetas(datosRecuperados, errorLLamada);
 
 
     // añadir carpetas
 
     var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
 
-    var agregarCarpetaOK= function(form){
+    var agregarCarpetaVidOK= function(form){
         $scope.mensaje= {
             show:true,
             texto: 'La carpeta se ha agregado correctamente',
@@ -99,7 +97,7 @@ angular.module('myEasyOrganicer')
         },4000);
     }
 
-    var agregarCarpetaKO= function(form){
+    var agregarCarpetaVidKO= function(form){
         $scope.mensaje= {
             show:true,
             texto: 'Error al guardar la carpeta, vuelva a intentarlo',
@@ -120,10 +118,8 @@ angular.module('myEasyOrganicer')
     }
 
 
-
-
-    $scope.agregarCarpeta =function(form){
-        var id=($scope.carpetasFotos).length + 1;
+    $scope.agregarCarpetaVid =function(form){
+        var id=($scope.carpetasVideos).length + 1;
         var fechaCarpeta = $filter('date')($scope.fechaCarpeta,'dd-MM-yyyy');
 
         var datosAEnviar= {
@@ -135,19 +131,21 @@ angular.module('myEasyOrganicer')
         };
         $scope.loading=true;
 
-        fotosService.addCarpeta(datosAEnviar, agregarCarpetaOK, agregarCarpetaKO, form);
+        videosService.addCarpeta(datosAEnviar, agregarCarpetaVidOK, agregarCarpetaVidKO, form);
     };
 
-    var agregarFotoOK= function(form){
+
+    // añadir Videos
+    var agregarVideoOK= function(form){
         $scope.mensaje= {
             show:true,
             texto: 'La foto se ha agregado correctamente',
             classMsg: true
         };
         $scope.loading=false;
-        $scope.tituloFoto='';
+        $scope.tituloVideo='';
         $scope.carpetas='';
-        $scope.fechaFoto='';
+        $scope.fechaVideo='';
         $scope.document=undefined;
         form.$setPristine();
         form.$setUntouched();
@@ -160,16 +158,16 @@ angular.module('myEasyOrganicer')
         },4000);
     }
 
-    var agregarFotoKO= function(form){
+    var agregarVideoKO= function(form){
         $scope.mensaje= {
             show:true,
             texto: 'Error al guardar la foto, vuelva a intentarlo',
             classMsg: false
         };
         $scope.loading=false;
-        $scope.tituloFoto='';
+        $scope.tituloVideo='';
         $scope.carpetas='';
-        $scope.fechaFoto='';
+        $scope.fechaVideo='';
         $scope.document=undefined;
         form.$setPristine();
         form.$setUntouched();
@@ -182,49 +180,42 @@ angular.module('myEasyOrganicer')
         },4000);
     }
 
-    $scope.agregarFoto =function(form){
-        var idFoto = Math.floor((Math.random() * 10000) + 1);
-        if($scope.fechaFoto===undefined){
-            var fechaFoto = fechaActual;
+    $scope.agregarVideo =function(form){
+        var idVideo = Math.floor((Math.random() * 10000) + 1);
+        if($scope.fechaVideo===undefined){
+            var fechaVideo = fechaActual;
         }
         else{
-            var fechaFoto = $filter('date')($scope.fechaFoto,'dd-MM-yyyy');
+            var fechaVideo = $filter('date')($scope.fechaVideo,'dd-MM-yyyy');
         }
 
-        if($scope.tituloFoto===undefined || $scope.tituloFoto===''){
-            var tituloFoto = 'foto' + idFoto;
+        if($scope.tituloVideo===undefined || $scope.fechaVideo===''){
+            var tituloVideo = 'video' + idVideo;
         }
         else{
-            var tituloFoto =$scope.tituloFoto;
+            var tituloVideo =$scope.tituloVideo;
         }
         var file=$('#file').get(0).files[0];
         var datosAEnviar= {
-            idFoto:idFoto,
+            idVideo:idVideo,
             idCarpeta: $scope.carpetas,
-            fechaIntroduccionFoto:fechaActual,
-            fechaFoto: fechaFoto,
-            tituloFoto:tituloFoto,
+            fechaIntroduccionVideo:fechaActual,
+            tituloVideo: tituloVideo,
+            fechaVideo:fechaVideo,
             file:file,
             chequeado:false
         };
+        console.log('datosAEnviar', datosAEnviar)
         $scope.loading=true;
-        fotosService.addFoto(datosAEnviar, agregarFotoOK, agregarFotoKO, form);
+        videosService.addVideo(datosAEnviar, agregarVideoKO, agregarVideoKO, form);
     };
 
-    $scope.formatoIconsFunc = function() {
-        $scope.formatoIcons =true;
-        $scope.formatoLista =false;
-    };
 
-    $scope.formatoListaFunc = function() {
-        $scope.formatoIcons =false;
-        $scope.formatoLista =true;
-    };
-
-    $scope.mostarModalFotos = function(carpeta) {
+    $scope.mostarModalVideos = function(carpeta) {
+        console.log('carpeta', carpeta)
         $mdDialog.show({
-            controller: 'mdlListFotosCtrl',
-            templateUrl: 'views/fotos/modales/mdlListFotos.html',
+            controller: 'mdlListVideosCtrl',
+            templateUrl: 'views/videos/modales/mdlListVideos.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
             resolve: {
@@ -286,7 +277,7 @@ angular.module('myEasyOrganicer')
     $scope.eliminarCarpeta= function(carpeta){
         var claveCarpeta =carpeta.$id;
         $scope.loading=true;
-        fotosService.deleteCarpetas(claveCarpeta, eliminarCarpetaOK, eliminarCarpetaKO);
+        videosService.deleteCarpetas(claveCarpeta, eliminarCarpetaOK, eliminarCarpetaKO);
     }
 
     var eliminarVariasCarpetasOK= function(){
@@ -315,7 +306,6 @@ angular.module('myEasyOrganicer')
             classMsg: false
         };
         $scope.loading=false;
-        // $scope.carpeta.expanded=true;
         $scope.$apply();
         $timeout(function(){
             $scope.mensaje= {
@@ -331,7 +321,7 @@ angular.module('myEasyOrganicer')
             if (carpeta[a].chequeado===true) {
                 var carpeta =carpeta;
                 $scope.loading=true;
-                fotosService.deleteVariasCarpetas(carpeta, eliminarVariasCarpetasOK, eliminarVariasCarpetasKO);
+                videosService.deleteVariasCarpetas(carpeta, eliminarVariasCarpetasOK, eliminarVariasCarpetasKO);
 
             }
             else{
@@ -339,7 +329,7 @@ angular.module('myEasyOrganicer')
                 $scope.formatoLista=false;
                 $scope.mensaje= {
                     show:true,
-                    texto: 'Tiene que chequear alguna foto para poder eliminar',
+                    texto: 'Tiene que chequear alguna carpeta para poder eliminar',
                     classMsg: false
                 };
 
@@ -392,7 +382,7 @@ angular.module('myEasyOrganicer')
         var claveCarpeta =carpeta.$id;
         var idFoto =foto.idFoto;
         $scope.loading=true;
-        fotosService.deleteFotos(claveCarpeta, idFoto, eliminarFotoOK, eliminarFotoKO);
+        videosService.deleteFotos(claveCarpeta, idFoto, eliminarFotoOK, eliminarFotoKO);
     }
 
     $scope.editarCarpeta= function(carpeta){

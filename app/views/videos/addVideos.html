@@ -1,8 +1,8 @@
-<div flex="90" class="add mgTop70 bkAuto " ng-controller="fotosCtrl">
-    <form name="fotosForm" flex="100">
-        <md-content class="md-padding bgNaranja">
+<div flex="90" class="add mgTop70 bkAuto " ng-controller="videosCtrl">
+    <form name="videosForm" flex="100">
+        <md-content class="md-padding bgAqua">
             <div class="cabecera md-padding" >
-                <span>Añadir Fotos</span>
+                <span>Añadir Videos</span>
             </div>
             <div layout="row" layout-align="center center" class="main-block-loading" ng-if="loading">
                 <div flex="5">
@@ -13,15 +13,15 @@
 
 
                 <md-input-container class="md-block">
-                    <label class="labelInput">Nombre de la foto (opcional)</label>
-                    <input ng-model="tituloFoto">
+                    <label class="labelInput">Nombre del Video (opcional)</label>
+                    <input ng-model="tituloVideo">
                 </md-input-container>
 
                 <md-input-container class="md-block">
                     <label class="labelInput">Elige carpeta de ubicacion</label>
                     <md-select name="carpetas" ng-model="carpetas" required>
                         <md-option
-                        ng-repeat="carpeta in carpetasFotos"
+                        ng-repeat="carpeta in carpetasVideos"
                         ng-value="carpeta.$id">
                         {{carpeta.titulo}}
                         </md-option>
@@ -29,22 +29,22 @@
                 </md-input-container>
                 <div flex="100" class="mgTop10" layout="row">
                     <div flex="50" class="mgTop10">
-                        <input class="ng-hide" id="file" ng-model="document" type="file" name="archivoFoto" valid-file>
+                        <input class="ng-hide" id="file" ng-model="document" type="file" name="archivoVideo" accept="video/mp4,video/x-m4v,video/*" valid-file>
                         <label for="file" class="md-button md-fab md-mini md-primary md-hue-2"><i class="fa fa-upload" aria-hidden="true"></i></label>
-                        <span class="fotoPend" ng-show="fotosForm.archivoFoto.$error.validFile || document===undefined">Agrega la fotografia</span>
-                        <span class="fotoAgreg" ng-show="!fotosForm.archivoFoto.$error.validFile && document!==undefined">Fotografia agregada</span>
+                        <span class="fotoPend" ng-show="videosForm.archivoVideo.$error.validFile || document===undefined">Agrega el video</span>
+                        <span class="fotoAgreg" ng-show="!videosForm.archivoVideo.$error.validFile && document!==undefined">Video agregada</span>
                     </div>
                     <div flex="50" class="contFecha">
                         <md-input-container>
-                            <label>Fecha foto (opcional)</label>
-                            <md-datepicker ng-model="fechaFoto"></md-datepicker>
+                            <label>Fecha video (opcional)</label>
+                            <md-datepicker ng-model="fechaVideo"></md-datepicker>
                         </md-input-container>
                     </div>
                 </div>
             </div>
             <div layout="row">
                 <div flex="25">
-                    <md-button class="md-raised md-primary btModal" ng-disabled="fotosForm.$invalid" ng-click="agregarFoto(fotosForm)">Añadir foto</md-button>
+                    <md-button class="md-raised md-primary btModal" ng-disabled="videosForm.$invalid" ng-click="agregarVideo(videosForm)">Añadir Video</md-button>
                 </div>
                 <div  flex="65" class="divMensaje"  ng-if="mensaje.show">
                     <md-whiteframe flex="100" class=" block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">

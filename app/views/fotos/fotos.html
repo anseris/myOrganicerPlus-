@@ -3,17 +3,17 @@
         <div flex="20">
             <div class="relative" ng-click="expandedCarpeta()">
                 <i class="fa fa-folder iconoCarpeta" aria-hidden="true"></i>
-                <i class="fa fa-plus iconMasCarpetas" aria-hidden="true"></i>
+                <i class="fa fa-plus iconMasCarpetas fuenteNaranja" aria-hidden="true"></i>
 
             </div>
             <div class="contetIconFoto relative" ng-click="expandedFoto()">
                 <i class="fa fa-picture-o iconoFotoGrande" aria-hidden="true"></i>
-                <i class="fa fa-plus iconMasFotos" aria-hidden="true"></i>
+                <i class="fa fa-plus iconMasFotos fuenteNaranja" aria-hidden="true"></i>
             </div>
         </div>
         <div flex="60" >
             <ng-include src="'views/fotos/principal.html'"  ng-hide="addCarpetaExpanded || addFotoExpanded || searchExpanded"></ng-include>
-            <ng-include src="'views/fotos/addCarpeta.html'" ng-show="addCarpetaExpanded"></ng-include>
+            <ng-include src="'views/fotos/addCarpetaFotos.html'" ng-show="addCarpetaExpanded"></ng-include>
             <ng-include src="'views/fotos/addFotos.html'"  ng-show="addFotoExpanded"></ng-include>
             <ng-include src="'views/fotos/searchFotos.html'"  ng-show="searchExpanded"></ng-include>
         </div>

@@ -1,21 +1,21 @@
-<md-content class="height100 bgVideos" layout-padding ng-controller="fotosCtrl">
+<md-content class="height100 bgVideos" layout-padding ng-controller="videosCtrl">
     <div flex="95" class="bkAuto" layout="row">
         <div flex="20">
             <div class="relative" ng-click="expandedCarpeta()">
                 <i class="fa fa-folder iconoCarpeta" aria-hidden="true"></i>
-                <i class="fa fa-plus iconMasCarpetas" aria-hidden="true"></i>
+                <i class="fa fa-plus iconMasCarpetas fuenteAqua" aria-hidden="true"></i>
 
             </div>
-            <div class="contetIconFoto relative" ng-click="expandedFoto()">
-                <i class="fa fa-picture-o iconoFotoGrande" aria-hidden="true"></i>
-                <i class="fa fa-plus iconMasFotos" aria-hidden="true"></i>
+            <div class="contetIconFoto relative" ng-click="expandedVideo()">
+                <i class="fa fa-file-video-o iconoFotoGrande" aria-hidden="true"></i>
+                <i class="fa fa-plus iconMasVideos fuenteAqua" aria-hidden="true"></i>
             </div>
         </div>
         <div flex="60" >
-            <ng-include src="'views/fotos/principal.html'"  ng-hide="addCarpetaExpanded || addFotoExpanded || searchExpanded"></ng-include>
-            <ng-include src="'views/fotos/addCarpeta.html'" ng-show="addCarpetaExpanded"></ng-include>
-            <ng-include src="'views/fotos/addFotos.html'"  ng-show="addFotoExpanded"></ng-include>
-            <ng-include src="'views/fotos/searchFotos.html'"  ng-show="searchExpanded"></ng-include>
+            <ng-include src="'views/videos/principal.html'"  ng-hide="addCarpetaExpanded || addVideoExpanded || searchExpanded"></ng-include>
+            <ng-include src="'views/videos/addCarpetaVideos.html'" ng-show="addCarpetaExpanded"></ng-include>
+            <ng-include src="'views/videos/addVideos.html'"  ng-show="addVideoExpanded"></ng-include>
+            <ng-include src="'views/videos/searchVideos.html'"  ng-show="searchExpanded"></ng-include>
         </div>
         <div flex="20">
             <div class="contetIconLupa" ng-click="expandedSearch()">

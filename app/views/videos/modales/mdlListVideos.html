@@ -1,0 +1,51 @@
+<md-dialog flex="55" aria-label="">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Lista de Videos</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <i class="fa fa-times-circle font25" aria-hidden="true"></i>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding>
+        <div layout="row" layout-align="center center" class="main-block-loading" ng-if="loading">
+            <div flex="5">
+               <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+           </div>
+        </div>
+        <div class="subContBusq">
+            <div flex="100" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="video in carpetas.archivos">
+                <div flex="100">
+                    <span>{{video.tituloVideo}}</span>
+                </div>
+                <div flex="100" class="contenedorFoto">
+                    <a  ng-click="Lightbox.openModal(video.video,$index)"><video flex="100" src="{{video.video.url}}" alt="" ></a>
+
+                </div>
+                <div flex="100"   layout="row">
+                    <div flex="80" class="" ><md-checkbox class="md-primary" ng-show="checkVariosVideos" ng-model="video.chequeado"></md-checkbox></div>
+                    <div flex="20" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarVideo(carpetas, video)"></i></div>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+
+        <div flex="50" class="divMensaje"  ng-if="mensaje.show">
+            <md-whiteframe flex="100" class=" block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
+                <p>{{mensaje.texto}}</p>
+            </md-whiteframe>
+        </div>
+        <div flex="30">
+            <md-checkbox class="md-primary" ng-model="checkVariosVideos"></md-checkbox>
+            <span>Eliminar varias fotos</span>
+        </div>
+        <div flex="20">
+            <md-button class="md-raised md-primary btModal" ng-disabled="!checkVariosVideos" ng-click="eliminarVariosVideos(carpetas,carpetas.archivos)">Eliminar foto</md-button>
+        </div>
+    </md-dialog-actions>
+
+</md-dialog>
