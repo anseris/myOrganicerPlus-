@@ -16,12 +16,17 @@
            </div>
         </div>
         <div class="subContBusq">
-            <div flex="100" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="video in carpetas.archivos">
+            <div flex="100" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="image in images">
                 <div flex="100">
                     <span>{{video.tituloVideo}}</span>
                 </div>
                 <div flex="100" class="contenedorFoto">
-                    <a  ng-click="Lightbox.openModal(video.video,$index)"><video flex="100" src="{{video.video.url}}" alt="" ></a>
+                    <!-- <a  ng-click="verVideo(video.video,$index)">
+                        <video flex="100" src="{{video.video.url}}" alt="" >
+                    </a> -->
+                    <a ng-click="Lightbox.openModal(images, $index)">
+                      <img ng-src="{{image.thumbUrl}}" class="img-thumbnail">
+                    </a>
 
                 </div>
                 <div flex="100"   layout="row">
