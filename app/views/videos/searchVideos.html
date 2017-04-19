@@ -45,20 +45,20 @@
                             <i flex="5" class="fa fa-folder " aria-hidden="true" ng-class="{'fa-folder': !carpeta.expanded, 'fa-folder-open': carpeta.expanded}"></i>
                             <div flex="45" >{{ carpeta.titulo }}</div>
                             <div flex="15" ng-if="(carpeta.archivos | objectKeysLength) > 0">{{ carpeta.archivos | objectKeysLength }} Fotos</div>
-                            <div flex="15" ng-if="carpeta.archivos===udefined">0 Fotos</div>
+                            <div flex="15" ng-if="carpeta.archivos===udefined">0 Videos</div>
                             <div flex="15" >{{ carpeta.fechaCarpeta }}</div>
                             <div flex="10" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarCarpeta(carpeta)"></i></div>
                             <div flex="10" class="alingCenter"><i class="fa fa-pencil" ng-click="editarCarpeta(carpeta)"></i></div>
                         </div>
-                        <div layout="row"  class="contenedorListaFotos" layout-wrap ng-repeat="foto in carpeta.archivos" ng-show="carpeta.expanded">
+                        <div layout="row"  class="contenedorListaFotos" layout-wrap ng-repeat="video in carpeta.archivos" ng-show="carpeta.expanded">
                             <i flex="5" class="fa fa-file-image-o" aria-hidden="true"></i>
-                            <div flex="45" >{{ foto.tituloFoto }}</div>
+                            <div flex="45" >{{ video.tituloVideo }}</div>
                             <div class="alingLeft" flex="15" >
-                                <a ng-click="verFoto(carpeta,$index)">Ver foto</a>
+                                <a ng-click="verVideo(video,$index)">Ver video</a>
                             </div>
-                            <div flex="15" >{{ foto.fechaFoto }}</div>
-                            <div flex="10" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarFoto(carpeta, foto)"></i></div>
-                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ng-click="editarFoto(carpeta, foto, carpetasVideos)"></i></div>
+                            <div flex="15" >{{ video.fechaVideo }}</div>
+                            <div flex="10" class="alingCenter"><i class="fa fa-trash" aria-hidden="true" ng-click="eliminarVideo(carpeta, video)"></i></div>
+                            <div flex="10" class="alingCenter"><i class="fa fa-pencil" ng-click="editarVideo(carpeta, video, carpetasVideos)"></i></div>
                         </div>
                     </div>
                 </div>

@@ -113,8 +113,14 @@
 .alingLeft {
   text-align: left;
 }
+.alignRight {
+  text-align: right;
+}
 .mgTop10 {
   margin-top: 10px;
+}
+.mgTop22 {
+  margin-top: 22px;
 }
 .btModal {
   background-color: #607d8b !important;
@@ -130,35 +136,6 @@
   right: 0;
   bottom: 0;
   z-index: 9;
-}
-#videogallery {
-  zoom: 1;
-}
-#videogallery span {
-  display: block;
-}
-#videogallery a {
-  display: -moz-inline-stack;
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-  position: relative;
-  vertical-align: top;
-  margin: 5px;
-  text-align: center;
-  opacity: 0.87;
-}
-#videogallery a img {
-  display: block;
-  border: none;
-  margin: 0;
-}
-#videogallery a:hover {
-  text-decoration: underline;
-  opacity: 1;
-}
-#videogallery a#videolb {
-  display: none;
 }
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -3129,7 +3106,6 @@ md-checkbox {
 .add md-content.md-default-theme,
 .add md-content {
   color: #607d8b;
-  border: 3px solid #607d8b;
 }
 .search {
   overflow: hidden;
@@ -3143,8 +3119,6 @@ md-checkbox {
 .search md-content.md-default-theme,
 .search md-content {
   color: #607d8b;
-  border: 3px solid #607d8b;
-  height: 550px;
 }
 .contPrinc md-content.md-default-theme,
 .contPrinc md-content {
@@ -3193,7 +3167,7 @@ md-checkbox {
 }
 .contCarpeta {
   float: left;
-  width: 25%;
+  width: 16.6%;
 }
 .formatoLista {
   margin-top: 10px;
@@ -3229,9 +3203,16 @@ md-checkbox {
   height: 100%;
 }
 .contenedorResultados {
-  margin-top: 20px;
-  height: 330px;
+  height: 440px;
   overflow: auto;
+}
+.contenedorResultadosFotos {
+  height: 440px;
+  overflow: auto;
+}
+.contenedorResultadosFotos img {
+  width: 60px;
+  height: 60px;
 }
 .info-user-invalidMsg {
   padding-top: 10px;
@@ -3271,4 +3252,8 @@ md-checkbox {
   font-size: 50px;
   top: 55px;
   left: 23px;
+}
+.imgEditarVideos {
+  width: 90%;
+  height: 200px;
 }

@@ -1,6 +1,46 @@
-<md-content class="height100 bgFotos" layout-padding ng-controller="fotosCtrl">
+<md-content class=" bgFotos"  ng-controller="fotosCtrl">
     <div flex="95" class="bkAuto" layout="row">
-        <div flex="20">
+
+        <!-- <div class="contPrinc  bkAuto" layout="column" style="height:500px;" ng-cloak ng-controller="fotosCtrl"> -->
+
+          <section layout="row" flex>
+            <md-sidenav class="md-sidenav-left md-whiteframe-4dp bgFotos" md-component-id="left">
+
+              <md-toolbar class="md-theme-light" layout="row">
+                <h1 flex="90" class="md-toolbar-tools">Añadir Carpetas</h1>
+                <i  flex="10" class="fa fa-chevron-left mgTop22" aria-hidden="true"  ng-click="closeLeft()"></i>
+              </md-toolbar>
+              <md-content class="bgFotos">
+                <ng-include src="'views/fotos/addCarpetaFotos.html'"></ng-include>
+              </md-content>
+
+            </md-sidenav>
+
+            <md-content class="bgFotos" flex layout-padding>
+
+             
+
+             <ng-include src="'views/fotos/searchFotos.html'"></ng-include>
+
+            </md-content>
+
+            <md-sidenav class="md-sidenav-right md-whiteframe-4dp bgFotos" md-component-id="right">
+
+              <md-toolbar class="md-theme-light" layout="row">
+                <i  flex="20" class="fa fa-chevron-right mgTop22 alingCenter" aria-hidden="true"  ng-click="closeRight()"></i>
+                <h1 layout-align="center center" flex="80" class="md-toolbar-tools">Añadir Fotos</h1>
+              </md-toolbar>
+              <md-content class="bgFotos">
+                <ng-include src="'views/fotos/addFotos.html'"></ng-include>
+
+              </md-content>
+
+            </md-sidenav>
+
+          </section>
+
+        <!-- </div> -->
+        <!-- <div flex="20">
             <div class="relative" ng-click="expandedCarpeta()">
                 <i class="fa fa-folder iconoCarpeta" aria-hidden="true"></i>
                 <i class="fa fa-plus iconMasCarpetas fuenteNaranja" aria-hidden="true"></i>
@@ -10,18 +50,18 @@
                 <i class="fa fa-picture-o iconoFotoGrande" aria-hidden="true"></i>
                 <i class="fa fa-plus iconMasFotos fuenteNaranja" aria-hidden="true"></i>
             </div>
-        </div>
-        <div flex="60" >
+        </div> -->
+        <!-- <div flex="60" >
             <ng-include src="'views/fotos/principal.html'"  ng-hide="addCarpetaExpanded || addFotoExpanded || searchExpanded"></ng-include>
             <ng-include src="'views/fotos/addCarpetaFotos.html'" ng-show="addCarpetaExpanded"></ng-include>
             <ng-include src="'views/fotos/addFotos.html'"  ng-show="addFotoExpanded"></ng-include>
             <ng-include src="'views/fotos/searchFotos.html'"  ng-show="searchExpanded"></ng-include>
-        </div>
-        <div flex="20">
+        </div> -->
+        <!-- <div flex="20">
             <div class="contetIconLupa" ng-click="expandedSearch()">
                 <i class="fa fa-search iconoFotoGrande" aria-hidden="true"></i>
             </div>
-        </div>
+        </div> -->
 
     </div>
 

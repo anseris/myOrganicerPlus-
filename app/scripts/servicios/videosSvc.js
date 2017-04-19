@@ -35,7 +35,7 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
 
 
     var actualizarCarpeta = function(datosAdded, idCarpeta, callback, callbackError, form) {
-        var refActCarp = db.ref("fotos/carpetas/" + idCarpeta);
+        var refActCarp = db.ref("videos/carpetas/" + idCarpeta);
         refActCarp.update(datosAdded, function(error){
             if(error){
                 callbackError(form)
@@ -62,11 +62,7 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
                     fechaIntroduccionVideo:datosAdded.fechaIntroduccionVideo,
                     fechaVideo: datosAdded.fechaVideo,
                     tituloVideo:datosAdded.tituloVideo,
-                    video:{
-                        type:file.type,
-                        url:url
-                    },
-                    img:url,
+                    url:url,
                     chequeado:datosAdded.chequeado
                 }, function(error){
                     if(error){
@@ -81,22 +77,22 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
         });
     };
 
-    var actualizarFoto = function(datosAdded, ubicCarpeta, idCarpetaOrig, callback, callbackError, form) {
+    var actualizarVideo = function(datosAdded, ubicCarpeta, idCarpetaOrig, callback, callbackError, form) {
         console.log('datosAdded', datosAdded)
         console.log('ubicCarpeta', ubicCarpeta)
 
         // var file= datosAdded.file;
         var idVideoA= datosAdded.idCarpeta;
-        var refActVideo = db.ref("fotos/carpetas/" + idVideoA + "/archivos/");
+        var refActVideo = db.ref("videos/carpetas/" + idVideoA + "/archivos/");
         if(ubicCarpeta==='otraCarpeta'){
             console.log('ubicCarpeta otra', ubicCarpeta)
             refActVideo.push().set({
-                idFoto:datosAdded.idFoto,
+                idVideo:datosAdded.idVideo,
                 idCarpeta: datosAdded.idCarpeta,
-                fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
-                fechaFoto: datosAdded.fechaFoto,
-                tituloFoto:datosAdded.tituloFoto,
-                img:datosAdded.img,
+                fechaIntroduccionVideo:datosAdded.fechaIntroduccionVideo,
+                fechaVideo: datosAdded.fechaVideo,
+                tituloVideo:datosAdded.tituloVideo,
+                url:datosAdded.url,
                 chequeado:datosAdded.chequeado
             }, function(error){
                 if(error){
@@ -106,28 +102,28 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
                     callback(form);
                 }
             });
-            deleteFotos(idCarpetaOrig, datosAdded.idFoto, '', '');
+            deleteVideo(idCarpetaOrig, datosAdded.idVideo, '', '');
 
         }
         var archivos={};
-        refActFoto.on('value',function(datos){
+        refActVideo.on('value',function(datos){
         	archivos=datos.val();
             angular.forEach(archivos, function(indice,valor) {
                 console.log('indice', indice);
                 console.log('valor', valor)
-                console.log('datosAdded.idFoto', datosAdded.idFoto)
-                if(indice.idFoto===datosAdded.idFoto){
-                    var idFotoUni=valor;
-                    var refActDefFoto = db.ref("fotos/carpetas/" + idVideoA + "/archivos/"+ idFotoUni);
+                console.log('datosAdded.idVideo', datosAdded.idVideo)
+                if(indice.idVideo===datosAdded.idVideo){
+                    var idVideoUni=valor;
+                    var refActDefVideo = db.ref("videos/carpetas/" + idVideoA + "/archivos/"+ idVideoUni);
                     if(ubicCarpeta==='mismaCarpeta'){
                         console.log('ubicCarpeta misma', ubicCarpeta)
-                        refActDefFoto.update({
-                            idFoto:datosAdded.idFoto,
+                        refActDefVideo.update({
+                            idVideo:datosAdded.idVideo,
                             idCarpeta: datosAdded.idCarpeta,
-                            fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
-                            fechaFoto: datosAdded.fechaFoto,
-                            tituloFoto:datosAdded.tituloFoto,
-                            img:datosAdded.img,
+                            fechaIntroduccionVideo:datosAdded.fechaIntroduccionVideo,
+                            fechaVideo: datosAdded.fechaVideo,
+                            tituloVideo:datosAdded.tituloVideo,
+                            url:datosAdded.url,
                             chequeado:datosAdded.chequeado
                         }, function(error){
                             if(error){
@@ -149,7 +145,7 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
     };
 
     var deleteCarpetas = function(idCarpeta, callback, callbackError){
-        var deleteCarpeta = db.ref("fotos/carpetas/" + idCarpeta);
+        var deleteCarpeta = db.ref("videos/carpetas/" + idCarpeta);
         deleteCarpeta.remove(function(error){
             if(error){
                 callbackError()
@@ -161,17 +157,17 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
 
     };
 
-    var deleteFotos = function(idCarpeta, idFoto, callback, callbackError){
-        var refArchivos = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/");
+    var deleteVideo = function(idCarpeta, idVideo, callback, callbackError){
+        var refArchivos = db.ref("videos/carpetas/" + idCarpeta + "/archivos/");
         var archivos={};
         refArchivos.on('value',function(datos){
         	archivos=datos.val();
             angular.forEach(archivos, function(indice,valor) {
 
-                if(indice.idFoto===idFoto){
-                    var idFotoUni=valor;
-                    var deleteFoto = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/"+ idFotoUni);
-                    deleteFoto.remove(function(error){
+                if(indice.idVideo===idVideo){
+                    var idVideoUni=valor;
+                    var deleteVideo = db.ref("videos/carpetas/" + idCarpeta + "/archivos/"+ idVideoUni);
+                    deleteVideo.remove(function(error){
                         if(error){
                             callbackError()
                         }
@@ -184,21 +180,21 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
         });
     }
 
-    var deleteVariasFotos = function(idCarpeta, fotos, callback, callbackError){
-        var refArchivos = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/");
-        for (var a in fotos) {
-            if (fotos[a].chequeado===true) {
-                var idFoto=fotos[a].idFoto;
-                console.log('idFoto',idFoto);
+    var deleteVariasVideos = function(idCarpeta, video, callback, callbackError){
+        var refArchivos = db.ref("videos/carpetas/" + idCarpeta + "/archivos/");
+        for (var a in video) {
+            if (video[a].chequeado===true) {
+                var idVideo=video[a].idVideo;
+                console.log('idVideo',idVideo);
                 var archivos={};
                 refArchivos.on('value',function(datos){
                 	archivos=datos.val();
                     angular.forEach(archivos, function(indice,valor) {
 
-                        if(indice.idFoto===idFoto){
-                            var idFotoUni=valor;
-                            var deleteFoto = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/"+ idFotoUni);
-                            deleteFoto.remove(function(error){
+                        if(indice.idVideo===idVideo){
+                            var idVideoUni=valor;
+                            var deleteVideo = db.ref("videos/carpetas/" + idCarpeta + "/archivos/"+ idVideoUni);
+                            deleteVideo.remove(function(error){
                                 if(error){
                                     callbackError()
                                 }
@@ -222,7 +218,7 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
         for (var a in carpetas) {
             if (carpetas[a].chequeado===true) {
                 var idCarpeta=carpetas[a].$id;
-                // console.log('idFoto',idFoto);
+                // console.log('idVideo',idFoto);
 
 
                     var deleteCarpeta = db.ref("videos/carpetas/" + idCarpeta);
@@ -248,11 +244,11 @@ angular.module('myEasyOrganicer').factory('videosService', ['$firebase', '$fireb
         recuperarCarpetas:recuperarCarpetas,
         addVideo:addVideo,
         deleteCarpetas:deleteCarpetas,
-        deleteFotos:deleteFotos,
-        deleteVariasFotos:deleteVariasFotos,
+        deleteVideo:deleteVideo,
+        deleteVariasVideos:deleteVariasVideos,
         deleteVariasCarpetas:deleteVariasCarpetas,
         actualizarCarpeta:actualizarCarpeta,
-        actualizarFoto:actualizarFoto
+        actualizarVideo:actualizarVideo
 
     };
 }]);

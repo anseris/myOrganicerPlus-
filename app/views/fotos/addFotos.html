@@ -1,16 +1,8 @@
-<div flex="90" class="add mgTop70 bkAuto " ng-controller="fotosCtrl">
+<div flex="90" class="add bkAuto " ng-controller="fotosCtrl">
     <form name="fotosForm" flex="100">
-        <md-content class="md-padding bgNaranja">
-            <div class="cabecera md-padding" >
-                <span>Añadir Fotos</span>
-            </div>
-            <div layout="row" layout-align="center center" class="main-block-loading" ng-if="loading">
-                <div flex="5">
-                   <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-               </div>
-            </div>
-            <div  class="md-padding">
+        <md-content class="bgNaranja">
 
+            <div layout-gt-xs="column" class="md-padding">
 
                 <md-input-container class="md-block">
                     <label class="labelInput">Nombre de la foto (opcional)</label>
@@ -27,14 +19,14 @@
                         </md-option>
                     </md-select>
                 </md-input-container>
-                <div flex="100" class="mgTop10" layout="row">
-                    <div flex="50" class="mgTop10">
+                <div flex="100" class="mgTop10">
+                    <div flex="100" class="mgTop22">
                         <input class="ng-hide" id="file" ng-model="document" type="file" name="archivoFoto" valid-file>
                         <label for="file" class="md-button md-fab md-mini md-primary md-hue-2"><i class="fa fa-upload" aria-hidden="true"></i></label>
                         <span class="fotoPend" ng-show="fotosForm.archivoFoto.$error.validFile || document===undefined">Agrega la fotografia</span>
                         <span class="fotoAgreg" ng-show="!fotosForm.archivoFoto.$error.validFile && document!==undefined">Fotografia agregada</span>
                     </div>
-                    <div flex="50" class="contFecha">
+                    <div flex="100" class="contFecha">
                         <md-input-container>
                             <label>Fecha foto (opcional)</label>
                             <md-datepicker ng-model="fechaFoto"></md-datepicker>
@@ -42,15 +34,13 @@
                     </div>
                 </div>
             </div>
-            <div layout="row">
-                <div flex="25">
-                    <md-button class="md-raised md-primary btModal" ng-disabled="fotosForm.$invalid" ng-click="agregarFoto(fotosForm)">Añadir foto</md-button>
-                </div>
-                <div  flex="65" class="divMensaje"  ng-if="mensaje.show">
-                    <md-whiteframe flex="100" class=" block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
-                        <p>{{mensaje.texto}}</p>
-                    </md-whiteframe>
-                </div>
+            <div flex="100">
+                <md-button class="md-raised md-primary btModal" ng-disabled="fotosForm.$invalid || (fotosForm.archivoFoto.$error.validFile || document===undefined)" ng-click="agregarFoto(fotosForm)">Añadir foto</md-button>
+            </div>
+            <div  flex="100" class="divMensaje"  ng-if="mensaje.show">
+                <md-whiteframe flex="100" class="bkAuto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
+                    <p>{{mensaje.texto}}</p>
+                </md-whiteframe>
             </div>
         </md-content>
     </form>

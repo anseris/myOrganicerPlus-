@@ -8,7 +8,7 @@
 * Controller of the pruebaApp
 */
 angular.module('myEasyOrganicer')
-.controller('videosCtrl',['$scope', '$mdDialog', 'videosService', '$filter','$firebase', 'Lightbox','$timeout', function ($scope, $mdDialog, videosService, $filter, $firebase,Lightbox, $timeout) {
+.controller('videosCtrl',['$scope', '$mdDialog', 'videosService', '$filter','$firebase', 'Lightbox','$timeout', '$window', function ($scope, $mdDialog, videosService, $filter, $firebase,Lightbox, $timeout, $window) {
 
     $scope.formatoIcons =true;
     $scope.formatoLista =false;
@@ -139,7 +139,7 @@ angular.module('myEasyOrganicer')
     var agregarVideoOK= function(form){
         $scope.mensaje= {
             show:true,
-            texto: 'La foto se ha agregado correctamente',
+            texto: 'El videos se ha agregado correctamente',
             classMsg: true
         };
         $scope.loading=false;
@@ -161,7 +161,7 @@ angular.module('myEasyOrganicer')
     var agregarVideoKO= function(form){
         $scope.mensaje= {
             show:true,
-            texto: 'Error al guardar la foto, vuelva a intentarlo',
+            texto: 'Error al guardar el video, vuelva a intentarlo',
             classMsg: false
         };
         $scope.loading=false;
@@ -207,7 +207,7 @@ angular.module('myEasyOrganicer')
         };
         console.log('datosAEnviar', datosAEnviar)
         $scope.loading=true;
-        videosService.addVideo(datosAEnviar, agregarVideoKO, agregarVideoKO, form);
+        videosService.addVideo(datosAEnviar, agregarVideoOK, agregarVideoKO, form);
     };
 
 
@@ -231,13 +231,9 @@ angular.module('myEasyOrganicer')
         });
     };
 
-    $scope.fotos= [];
-    $scope.verFoto = function (foto,index) {
 
-        for (var a in foto.archivos) {
-            $scope.fotos.push(foto.archivos[a].img);
-        }
-        Lightbox.openModal($scope.fotos, index);
+    $scope.verVideo = function (video, index) {
+        $window.open(video.url, '_blank', 'toolbar=no,scrollbars=no,resizable=yes,top=0,left=0,width=750,height=600');
     };
 
     var eliminarCarpetaOK= function(){
@@ -344,10 +340,10 @@ angular.module('myEasyOrganicer')
 
     }
 
-    var eliminarFotoOK= function(){
+    var eliminarVideoOK= function(){
         $scope.mensaje= {
             show:true,
-            texto: 'La foto se ha eliminado correctamente',
+            texto: 'El video se ha eliminado correctamente',
             classMsg: true
         };
         $scope.loading=false;
@@ -361,10 +357,10 @@ angular.module('myEasyOrganicer')
         },4000);
     }
 
-    var eliminarFotoKO= function(){
+    var eliminarVideoKO= function(){
         $scope.mensaje= {
             show:true,
-            texto: 'ERROR al eliminar la foto, vuelva a intentar',
+            texto: 'ERROR al eliminar el video, vuelva a intentar',
             classMsg: false
         };
         $scope.loading=false;
@@ -378,17 +374,17 @@ angular.module('myEasyOrganicer')
         },4000);
     }
 
-    $scope.eliminarFoto= function(carpeta,  foto){
+    $scope.eliminarVideo= function(carpeta,  video){
         var claveCarpeta =carpeta.$id;
-        var idFoto =foto.idFoto;
+        var idVideo =video.idVideo;
         $scope.loading=true;
-        videosService.deleteFotos(claveCarpeta, idFoto, eliminarFotoOK, eliminarFotoKO);
+        videosService.deleteVideo(claveCarpeta, idVideo, eliminarVideoOK, eliminarVideoKO);
     }
 
     $scope.editarCarpeta= function(carpeta){
         $mdDialog.show({
-            controller: 'mdlEditCarpetaCtrl',
-            templateUrl: 'views/fotos/modales/mdlEditarCarpeta.html',
+            controller: 'mdlEditCarpetaVidCtrl',
+            templateUrl: 'views/videos/modales/mdlEditarCarpetasVid.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
             resolve: {
@@ -404,18 +400,18 @@ angular.module('myEasyOrganicer')
         });
     }
 
-    $scope.editarFoto= function(carpeta, foto, carpetas){
+    $scope.editarVideo= function(carpeta, video, carpetas){
         $mdDialog.show({
-            controller: 'mdlEditFotoCtrl',
-            templateUrl: 'views/fotos/modales/mdlEditarFotos.html',
+            controller: 'mdlEditVideosCtrl',
+            templateUrl: 'views/videos/modales/mdlEditarVideos.html',
             parent: angular.element(document.body),
             clickOutsideToClose: true,
             resolve: {
                 carpeta: function() {
                     return carpeta;
                 },
-                foto: function() {
-                    return foto;
+                video: function() {
+                    return video;
                 },
                 carpetas: function() {
                     return carpetas;

@@ -8,7 +8,116 @@
 * Controller of the pruebaApp
 */
 angular.module('myEasyOrganicer')
-.controller('fotosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', 'Lightbox','$timeout', function ($scope, $mdDialog, fotosService, $filter, $firebase,Lightbox, $timeout) {
+.controller('fotosCtrl',['$scope', '$mdDialog', 'fotosService', '$filter','$firebase', 'Lightbox','$timeout', '$mdSidenav', '$log', function ($scope, $mdDialog, fotosService, $filter, $firebase,Lightbox, $timeout, $mdSidenav, $log) {
+
+
+
+    $scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+    $scope.isOpenRight = function(){
+      return $mdSidenav('right').isOpen();
+    };
+    $scope.isOpenLeft = function(){
+      return $mdSidenav('left').isOpen();
+    };
+
+    /**
+     * Supplies a function that will continue to operate until the
+     * time is up.
+     */
+    function debounce(func, wait, context) {
+      var timer;
+
+      return function debounced() {
+        var context = $scope,
+            args = Array.prototype.slice.call(arguments);
+        $timeout.cancel(timer);
+        timer = $timeout(function() {
+          timer = undefined;
+          func.apply(context, args);
+        }, wait || 10);
+      };
+    }
+
+    /**
+     * Build handler to open/close a SideNav; when animation finishes
+     * report completion in console
+     */
+
+
+    function buildToggler(navID) {
+      return function() {
+        // Component lookup should always be available since we are not using `ng-if`
+        $mdSidenav(navID)
+          .toggle()
+          .then(function () {
+            $log.debug("toggle " + navID + " is done");
+          });
+      };
+    }
+
+    $scope.closeLeft = function () {
+      // Component lookup should always be available since we are not using `ng-if`
+      $mdSidenav('left').close()
+        .then(function () {
+          $log.debug("close LEFT is done");
+        });
+
+    };
+
+    $scope.closeRight = function () {
+      // Component lookup should always be available since we are not using `ng-if`
+      $mdSidenav('right').close()
+        .then(function () {
+          $log.debug("close RIGHT is done");
+        });
+    };
+
+    $scope.contenedorFotosCarp=false;
+    $scope.contenedorCarpetas=true;
+    // $scope.mostrarBotones='';
+    //
+    //
+    //
+    // $scope.ocultarBotonesAnadir= function(){
+    //     console.log('data', $scope.mostrarBotones)
+    //         $scope.mostrarBotones=true;
+    //         console.log('data', $scope.mostrarBotones)
+    //
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     $scope.formatoIcons =true;
     $scope.formatoLista =false;
@@ -52,7 +161,6 @@ angular.module('myEasyOrganicer')
         $scope.carpetasFotos=datos;
         var fotos=($scope.carpetasFotos).length;
         $scope.loading=false;
-        console.log('fotos', fotos);
     };
 
 
@@ -221,24 +329,20 @@ angular.module('myEasyOrganicer')
         $scope.formatoLista =true;
     };
 
-    $scope.mostarModalFotos = function(carpeta) {
-        $mdDialog.show({
-            controller: 'mdlListFotosCtrl',
-            templateUrl: 'views/fotos/modales/mdlListFotos.html',
-            parent: angular.element(document.body),
-            clickOutsideToClose: true,
-            resolve: {
-                carpeta: function() {
-                    return carpeta;
-                }
-            }
-        }).then(function(answer) {
 
-
-        }, function() {
-
-        });
+    $scope.mostarFotos = function(carpeta) {
+        $scope.contenedorCarpetas=false;
+        $scope.contenedorFotosCarp=true;
+        $scope.fotosSeleccionadas=carpeta;
     };
+    $scope.irVistaCarpetas = function(carpeta) {
+        $scope.contenedorCarpetas=true;
+        $scope.contenedorFotosCarp=false;
+    };
+
+
+
+
 
     $scope.fotos= [];
     $scope.verFoto = function (foto,index) {
@@ -393,6 +497,48 @@ angular.module('myEasyOrganicer')
         var idFoto =foto.idFoto;
         $scope.loading=true;
         fotosService.deleteFotos(claveCarpeta, idFoto, eliminarFotoOK, eliminarFotoKO);
+    }
+
+    var eliminarVariasFotosOK= function(){
+        $scope.mensaje= {
+            show:true,
+            texto: 'Las fotos se han eliminado correctamente',
+            classMsg: true
+        };
+        $scope.loading=false;
+        // $scope.carpeta.expanded=true;
+        $scope.$apply();
+        $timeout(function(){
+            $scope.mensaje= {
+                show:false
+            };
+            $scope.$apply();
+        },4000);
+    }
+
+    var eliminarVariasFotosKO= function(){
+        $scope.mensaje= {
+            show:true,
+            texto: 'ERROR al eliminar las fotos, vuelva a intentar',
+            classMsg: false
+        };
+        $scope.loading=false;
+        // $scope.carpeta.expanded=true;
+        $scope.$apply();
+        $timeout(function(){
+            $scope.mensaje= {
+                show:false
+            };
+            $scope.$apply();
+        },4000);
+    }
+
+    $scope.eliminarVariasFotos= function(carpeta,fotos){
+
+        var claveCarpeta =carpeta.$id;
+        var fotos =fotos;
+        $scope.loading=true;
+        fotosService.deleteVariasFotos(claveCarpeta, fotos, eliminarVariasFotosOK, eliminarVariasFotosKO);
     }
 
     $scope.editarCarpeta= function(carpeta){
