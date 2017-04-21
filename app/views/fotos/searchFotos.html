@@ -23,11 +23,11 @@
                </div>
             </div> -->
             <!-- <div  class="md-padding"> -->
-            <div class="contenedorCarpetas" ng-show="contenedorCarpetas">
+            <div flex="90" class="contenedorCarpetas bkAuto" ng-show="contenedorCarpetas">
                 <div flex="70" layout="row" class="bkAuto">
                     <md-input-container flex="70" class="md-block">
                         <label>Busca carpeta</label>
-                        <input flex="100" ng-model="buscadorFotos">
+                        <input flex="100" ng-model="buscadorCarpetas">
 
                     </md-input-container>
                     <div flex="30" class="alignRight">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="contenedorResultados">
                     <div class="subContBusq" ng-show="formatoIcons">
-                        <div flex="25" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="carpeta in carpetasFotos | filter:buscadorFotos">
+                        <div flex="25" layout-padding  class="bkAuto alingCenter contCarpeta relative" ng-repeat="carpeta in carpetasFotos | filter:buscadorCarpetas">
                             <span>{{carpeta.titulo}}</span><br>
                             <i class="fa fa-folder-o iconoCarpetaSearch" aria-hidden="true" ng-click="mostarFotos(carpeta)"></i>
                             <div class="numFotos">
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <div class="contenedorFotosCarp" ng-show="contenedorFotosCarp">
+            <div flex="90" class="contenedorFotosCarp bkAuto" ng-show="contenedorFotosCarp">
                 <div flex="100" layout="row" class="bkAuto">
                 <div flex="10"><md-button ng-click="irVistaCarpetas()" class="md-raised md-primary"><i class="fa fa-chevron-left" aria-hidden="true" ng-click=""></i></md-button></div>
                     <md-input-container flex="40" class="md-block">
@@ -90,9 +90,12 @@
                         <input flex="100" ng-model="buscadorFotos">
 
                     </md-input-container>
-                    <div flex="25"><md-button ng-click="" class="md-raised md-primary"><i class="fa fa-trash" aria-hidden="true" ng-click=""></i> Añadir fotos en esta carpeta</md-button></div>
-                    <div flex="20"><md-button ng-click="eliminarVariasFotos(fotosSeleccionadas,fotosSeleccionadas.archivos)" class="md-raised md-primary"><i class="fa fa-trash" aria-hidden="true"></i>Elimirar varias fotos</md-button></div>
-
+                    <form name="formAddFotosThis">
+                        <div layout="row">
+                            <input class="ng-hide" id="fileThis" ng-model="documentThis" type="file" name="archivoFotoThis" valid-file>
+                            <div ><label for="fileThis" class="md-button md-raised md-primary"><i class="fa fa-plus" aria-hidden="true"></i> Añadir fotos en esta carpeta</label></div>
+                            <div ><md-button ng-click="eliminarVariasFotos(fotosSeleccionadas,fotosSeleccionadas.archivos)" class="md-raised md-primary"><i class="fa fa-trash" aria-hidden="true"></i>Elimirar varias fotos</md-button></div>
+                        </div>
                 </div>
                 <!-- <div  flex="100" class="mgTop10"  ng-if="mensaje.show">
                     <md-whiteframe flex="100" class="info-user-invalidMsg block-auto" ng-class="{'info-user-validMsg' : mensaje.classMsg, 'info-user-invalidMsg' : !mensaje.classMsg}" layout margin layout-align="center center">
@@ -100,9 +103,26 @@
                     </md-whiteframe>
                 </div> -->
                 <div class="contenedorResultadosFotos">
-                    <!-- {{fotosSeleccionadas}} -->
 
-                    <div flex="100" ng-repeat="foto in fotosSeleccionadas.archivos" layout="row" class="mgTop10">
+                        <div flex="100" layout="row" class="mgTop10"  ng-show="!formAddFotosThis.archivoFotoThis.$error.validFile && documentThis!==undefined">
+                            <div flex="40">
+                                <md-input-container class="md-block">
+                                    <label class="labelInput">Nombre de la foto (opcional)</label>
+                                    <input ng-model="tituloFotoThis">
+                                </md-input-container>
+                            </div>
+                            <div flex="30" class="contFecha">
+                                <md-input-container>
+                                    <label>Fecha foto (opcional)</label>
+                                    <md-datepicker ng-model="fechaFotoThis"></md-datepicker>
+                                </md-input-container>
+                            </div>
+                            <div flex="20" class="barraCarga" ><md-progress-linear md-mode="indeterminate" ng-if="loading"></md-progress-linear></div>
+                            <div flex="10"><md-button ng-click="agregarFotoThis(formAddFotosThis, fotosSeleccionadas)" class="md-raised md-primary"><i class="fa fa-pencil"></i></md-button></div>
+                        </div>
+                    </form>
+
+                    <div flex="100" ng-repeat="foto in fotosSeleccionadasDef | filter:buscadorFotos" layout="row" class="mgTop10">
                         <div flex="5" class="mgTop10"><md-checkbox class="md-primary" ng-model="foto.chequeado" ng-click="ckeckChequeados()"></md-checkbox></div>
                         <div flex="10" ng-click="verFoto(fotosSeleccionadas,$index)"><img src="{{foto.img}}" alt=""></div>
                         <div flex="45" class="mgTop10">{{foto.tituloFoto}}</div>

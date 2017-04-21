@@ -231,6 +231,7 @@ angular.module('myEasyOrganicer')
 
 
     $scope.agregarCarpeta =function(form){
+        var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
         var id=($scope.carpetasFotos).length + 1;
         var fechaCarpeta = $filter('date')($scope.fechaCarpeta,'dd-MM-yyyy');
 
@@ -291,6 +292,8 @@ angular.module('myEasyOrganicer')
     }
 
     $scope.agregarFoto =function(form){
+        var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+        var fechaActualOrder= $filter('date')(new Date(),'hmmss');
         var idFoto = Math.floor((Math.random() * 10000) + 1);
         if($scope.fechaFoto===undefined){
             var fechaFoto = fechaActual;
@@ -310,6 +313,7 @@ angular.module('myEasyOrganicer')
             idFoto:idFoto,
             idCarpeta: $scope.carpetas,
             fechaIntroduccionFoto:fechaActual,
+            fechaOrden:fechaActualOrder,
             fechaFoto: fechaFoto,
             tituloFoto:tituloFoto,
             file:file,
@@ -318,6 +322,88 @@ angular.module('myEasyOrganicer')
         $scope.loading=true;
         fotosService.addFoto(datosAEnviar, agregarFotoOK, agregarFotoKO, form);
     };
+
+    var agregarFotoThisOK= function(form, carpeta){
+        $scope.mensaje= {
+            show:true,
+            texto: 'La foto se ha agregado correctamente',
+            classMsg: true
+        };
+        $scope.mostarFotos(carpeta);
+        $scope.loading=false;
+        $scope.tituloFoto='';
+        $scope.carpetas='';
+        $scope.fechaFoto='';
+        $scope.documentThis=undefined;
+        form.$setPristine();
+        form.$setUntouched();
+        $scope.$apply();
+        $timeout(function(){
+            $scope.mensaje= {
+                show:false
+            };
+            $scope.$apply();
+
+        },4000);
+    }
+
+    var agregarFotoThisKO= function(form){
+        $scope.mensaje= {
+            show:true,
+            texto: 'Error al guardar la foto, vuelva a intentarlo',
+            classMsg: false
+        };
+        $scope.loading=false;
+        $scope.tituloFoto='';
+        $scope.carpetas='';
+        $scope.fechaFoto='';
+        $scope.documentThis=undefined;
+        form.$setPristine();
+        form.$setUntouched();
+        $scope.$apply();
+        $timeout(function(){
+            $scope.mensaje= {
+                show:false
+            };
+            $scope.$apply();
+        },4000);
+    }
+
+    $scope.agregarFotoThis =function(form, carpeta){
+        var fechaActual= $filter('date')(new Date(),'dd-MM-yyyy');
+        var fechaActualOrder= $filter('date')(new Date(),'hmmss');
+        console.log('carpeta', carpeta)
+        var idCarpeta=carpeta.$id;
+        var idFoto = Math.floor((Math.random() * 10000) + 1);
+        if($scope.fechaFotoThis===undefined){
+            var fechaFoto = fechaActual;
+        }
+        else{
+            var fechaFoto = $filter('date')($scope.fechaFotoThis,'dd-MM-yyyy');
+        }
+
+        if($scope.tituloFotoThis===undefined || $scope.tituloFotoThis===''){
+            var tituloFoto = 'foto' + idFoto;
+        }
+        else{
+            var tituloFoto =$scope.tituloFotoThis;
+        }
+        var file=$('#fileThis').get(0).files[0];
+        var datosAEnviar= {
+            idFoto:idFoto,
+            idCarpeta:idCarpeta,
+            fechaIntroduccionFoto:fechaActual,
+            fechaOrden:fechaActualOrder,
+            fechaFoto: fechaFoto,
+            tituloFoto:tituloFoto,
+            file:file,
+            chequeado:false
+        };
+        $scope.loading=true;
+        fotosService.addFoto(datosAEnviar, agregarFotoThisOK, agregarFotoThisKO, form, carpeta);
+    };
+
+
 
     $scope.formatoIconsFunc = function() {
         $scope.formatoIcons =true;
@@ -331,9 +417,17 @@ angular.module('myEasyOrganicer')
 
 
     $scope.mostarFotos = function(carpeta) {
+        console.log('fecha', carpeta.archivos)
         $scope.contenedorCarpetas=false;
         $scope.contenedorFotosCarp=true;
         $scope.fotosSeleccionadas=carpeta;
+        $scope.fotosArray= [];
+        for (var a in carpeta.archivos) {
+            $scope.fotosArray.push(carpeta.archivos[a]);
+        }
+        // $scope.fotosSeleccionadas=carpeta;
+        var param = $filter('orderBy')($scope.fotosArray, '-fechaOrden')
+        $scope.fotosSeleccionadasDef=param;
     };
     $scope.irVistaCarpetas = function(carpeta) {
         $scope.contenedorCarpetas=true;
@@ -457,14 +551,14 @@ angular.module('myEasyOrganicer')
         }
 
     }
-
-    var eliminarFotoOK= function(){
+    var eliminarFotoOK= function(carpeta){
         $scope.mensaje= {
             show:true,
             texto: 'La foto se ha eliminado correctamente',
             classMsg: true
         };
         $scope.loading=false;
+        $scope.mostarFotos(carpeta);
         // $scope.carpeta.expanded=true;
         $scope.$apply();
         $timeout(function(){
@@ -481,6 +575,7 @@ angular.module('myEasyOrganicer')
             texto: 'ERROR al eliminar la foto, vuelva a intentar',
             classMsg: false
         };
+        $scope.mostarFotos(carpeta);
         $scope.loading=false;
         // $scope.carpeta.expanded=true;
         $scope.$apply();
@@ -496,16 +591,17 @@ angular.module('myEasyOrganicer')
         var claveCarpeta =carpeta.$id;
         var idFoto =foto.idFoto;
         $scope.loading=true;
-        fotosService.deleteFotos(claveCarpeta, idFoto, eliminarFotoOK, eliminarFotoKO);
+        fotosService.deleteFotos(claveCarpeta, idFoto, eliminarFotoOK, eliminarFotoKO, carpeta);
     }
 
-    var eliminarVariasFotosOK= function(){
+    var eliminarVariasFotosOK= function(carpeta){
         $scope.mensaje= {
             show:true,
             texto: 'Las fotos se han eliminado correctamente',
             classMsg: true
         };
         $scope.loading=false;
+        $scope.mostarFotos(carpeta);
         // $scope.carpeta.expanded=true;
         $scope.$apply();
         $timeout(function(){
@@ -538,7 +634,7 @@ angular.module('myEasyOrganicer')
         var claveCarpeta =carpeta.$id;
         var fotos =fotos;
         $scope.loading=true;
-        fotosService.deleteVariasFotos(claveCarpeta, fotos, eliminarVariasFotosOK, eliminarVariasFotosKO);
+        fotosService.deleteVariasFotos(claveCarpeta, fotos, eliminarVariasFotosOK, eliminarVariasFotosKO, carpeta);
     }
 
     $scope.editarCarpeta= function(carpeta){

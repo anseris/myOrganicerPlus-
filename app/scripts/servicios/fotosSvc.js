@@ -41,7 +41,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
 
 
-    var actualizarCarpeta = function(datosAdded, idCarpeta, callback, callbackError, form) {
+    var actualizarCarpeta = function(datosAdded, idCarpeta, callback, callbackError, form, carpeta) {
         var refActCarp = db.ref("fotos/carpetas/" + idCarpeta);
         refActCarp.update(datosAdded, function(error){
             if(error){
@@ -53,7 +53,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         });
     };
 
-    var addFoto = function(datosAdded, callback, callbackError, form) {
+    var addFoto = function(datosAdded, callback, callbackError, form, carpeta) {
         console.log('datosAdded', datosAdded)
 
         var file= datosAdded.file;
@@ -67,6 +67,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                     idFoto:datosAdded.idFoto,
                     idCarpeta: datosAdded.idCarpeta,
                     fechaIntroduccionFoto:datosAdded.fechaIntroduccionFoto,
+                    fechaOrden:datosAdded.fechaOrden,
                     fechaFoto: datosAdded.fechaFoto,
                     tituloFoto:datosAdded.tituloFoto,
                     img:url,
@@ -76,7 +77,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                         callbackError(form);
                     }
                     else{
-                        callback(form);
+                        callback(form, carpeta);
                     }
                 });
             });
@@ -163,7 +164,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
 
     };
 
-    var deleteFotos = function(idCarpeta, idFoto, callback, callbackError){
+    var deleteFotos = function(idCarpeta, idFoto, callback, callbackError, carpeta){
         var refArchivos = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/");
         var archivos={};
         refArchivos.on('value',function(datos){
@@ -178,7 +179,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                             callbackError()
                         }
                         else{
-                            callback();
+                            callback(carpeta);
                         }
                     });
                 }
@@ -186,7 +187,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
         });
     }
 
-    var deleteVariasFotos = function(idCarpeta, fotos, callback, callbackError){
+    var deleteVariasFotos = function(idCarpeta, fotos, callback, callbackError, carpeta){
         var refArchivos = db.ref("fotos/carpetas/" + idCarpeta + "/archivos/");
         for (var a in fotos) {
             if (fotos[a].chequeado===true) {
@@ -205,7 +206,7 @@ angular.module('myEasyOrganicer').factory('fotosService', ['$firebase', '$fireba
                                     callbackError()
                                 }
                                 else{
-                                    callback();
+                                    callback(carpeta);
                                 }
                             });
                         }

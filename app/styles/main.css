@@ -3244,6 +3244,13 @@ md-checkbox {
   font-size: 30px !important;
   margin-left: 25px;
 }
+.barraCarga {
+  margin-top: 25px;
+}
+.barraCarga md-progress-linear.md-default-theme .md-container,
+.barraCarga md-progress-linear .md-container {
+  background-color: #ff9800;
+}
 .bgVideos {
   background-color: aqua;
 }
